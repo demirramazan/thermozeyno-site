@@ -1,0 +1,91 @@
+==========================================================
+  GOOGLE'DA ÇIKMA REHBERİ  (Zeynep Demir — Thermomix TM7)
+==========================================================
+
+ÖN NOT (dürüst beklenti):
+- "Thermomix" kelimesinde 1. sıra çok zor (resmi Vorwerk siteleri kapıyor).
+- Gerçekçi ve ulaşılabilir hedefler:
+  "thermomix danışman", "zeynep demir thermomix", "thermomix tm7 kampanya
+  danışman", şehir adı + thermomix gibi aramalar.
+- Sonuçların Google'a yansıması 1-4 hafta sürebilir; sabır gerekir.
+
+----------------------------------------------------------
+ADIM 1 — SİTEYİ YAYINLA (önce bu olmalı)
+----------------------------------------------------------
+1. https://app.netlify.com/drop aç.
+2. thermomix-site klasörünü (içindeki tüm dosyaları) sürükle-bırak.
+3. Ücretsiz hesap aç (Google ile) -> Site configuration -> Change site name
+   -> "thermozeyno" yaz.  Adres: https://thermozeyno.vercel.app
+   (Alınmışsa: thermozeyno-tm7 gibi bir alternatif seç ve bana söyle,
+    SEO dosyalarındaki adresi güncelleyeyim.)
+
+----------------------------------------------------------
+ADIM 2 — GOOGLE SEARCH CONSOLE
+----------------------------------------------------------
+1. https://search.google.com/search-console adresine Google hesabınla gir.
+2. "Özellik ekle" -> "URL ön eki" -> https://thermozeyno.vercel.app yaz.
+3. DOĞRULAMA: "HTML etiketi" yöntemini seç. Google sana şöyle bir kod verir:
+      <meta name="google-site-verification" content="XXXXXXXX" />
+4. Bu kodu bana ver YA DA index.html içinde şu satırı bul:
+      <!-- <meta name="google-site-verification" content="BURAYA_GOOGLE_KODU" /> -->
+   Yorum işaretlerini (<!-- -->) kaldır, BURAYA_GOOGLE_KODU yerine Google'ın
+   verdiği kodu yapıştır, kaydet, siteyi Netlify'a tekrar yükle.
+5. Search Console'da "Doğrula" butonuna bas.
+
+----------------------------------------------------------
+ADIM 3 — SİTE HARİTASI (SITEMAP) GÖNDER
+----------------------------------------------------------
+1. Search Console -> sol menü "Site Haritaları".
+2. Şunu ekle:  sitemap.xml   (tam adres: https://thermozeyno.vercel.app/sitemap.xml)
+3. "Gönder" de. (Site zaten sitemap.xml ve robots.txt ile hazır.)
+
+----------------------------------------------------------
+ADIM 4 — DİZİNE EKLETME (hızlandırır)
+----------------------------------------------------------
+1. Search Console üstteki arama kutusuna ana sayfanı yaz:
+   https://thermozeyno.vercel.app/
+2. "Dizine ekleme isteğinde bulun" tıkla. Aynısını şu sayfalar için yap:
+   /danisman-ol.html  ve  /siparis-adimlari.html
+
+----------------------------------------------------------
+ADIM 5 — GOOGLE İŞLETME PROFİLİ (ÇOK ETKİLİ - opsiyonel)
+----------------------------------------------------------
+- https://business.google.com -> ücretsiz işletme profili oluştur
+  ("Zeynep Demir - Thermomix Danışmanı"). Yerel aramalarda ve Google
+  Haritalar'da çıkmanı sağlar, müşteri yorumu toplarsın.
+
+----------------------------------------------------------
+ADIM 6 — DIŞ BAĞLANTILAR (sıralamayı güçlendirir)
+----------------------------------------------------------
+- Instagram (@thermozeyno) ve YouTube biyografilerine site linkini koy.
+- WhatsApp durumunda, paylaşımlarda site linkini kullan.
+- Ne kadar çok ziyaret + bağlantı, o kadar iyi sıralama.
+
+----------------------------------------------------------
+ADIM 7 — İSTATİSTİK (kim hangi linke tıkladı?)
+----------------------------------------------------------
+Google Analytics (ücretsiz) ile ziyaretçi sayısını ve SATIN AL /
+DANIŞMAN / WHATSAPP linklerine kaç kişi tıkladığını görürsün.
+
+1. https://analytics.google.com aç -> ücretsiz hesap/"Mülk" oluştur.
+2. Platform olarak "Web" seç, site adresi: https://thermozeyno.vercel.app
+3. Sana bir "Ölçüm Kimliği" verir:  G-XXXXXXXXXX
+4. Bu kodu config.js içinde şu satıra yapıştır:
+      gaMeasurementId: "G-XXXXXXXXXX"   ->  kendi kodunla değiştir
+5. Siteyi Netlify'a tekrar yükle.
+
+NEREDE GÖRÜNÜR?
+- Anlık: Analytics -> "Raporlar" -> "Gerçek Zamanlı"
+- Tıklamalar: Analytics -> "Raporlar" -> "Etkileşim" -> "Etkinlikler"
+  Şu olay adlarını görürsün:
+     satin_al_tikla        (Satın Al linkine tıklayanlar)
+     whatsapp_tikla        (WhatsApp'a yazanlar)
+     danisman_ol_tikla     (Danışman Ol sayfasına gidenler)
+     siparis_adimlari_tikla
+     instagram_tikla / youtube_tikla
+- Not: Veriler birkaç saat-1 gün içinde raporlara düşer; "Gerçek Zamanlı"
+  ise anında gösterir (kendin test edebilirsin).
+
+==========================================================
+Takıldığın her adımda bana yaz, ekran ekran yardımcı olurum.
+==========================================================
