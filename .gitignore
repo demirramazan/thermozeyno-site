@@ -1,6 +1,3 @@
-# Local agent/assistant configuration
-.agents/
-.claude/
 
 # Vercel local project metadata
 .vercel/

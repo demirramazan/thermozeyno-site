@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:thermomix.vorwerk.com.tr)",
+      "Bash(node --check config.js)",
+      "Bash(node --check script.js)",
+      "Bash(nslookup thermozeyno.netlify.app)",
+      "Bash(curl -sS -I --max-time 20 https://www.netlify.com)",
+      "Bash(curl -sS -I --max-time 20 http://thermozeyno.netlify.app)"
+    ]
+  }
+}

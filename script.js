@@ -227,7 +227,7 @@
     set("campaign-period", function (el) { el.textContent = cfg.campaignPeriod; });
   }
   set("announce-text", function (el) {
-    el.innerHTML = "🎁 <strong>Eylül Kampanyası:</strong> TM7 vade farksız 6 taksitle 89.990 ₺ — Thermomix® Yemek Takımı 6.990 ₺ yerine 2.750 ₺ · 1–15 Eylül'de 10.000 ₺ Garanti Bonus · <a href='#kampanya' style='color:#fff;text-decoration:underline'>İncele</a>";
+    el.innerHTML = "🍂 <strong>Kasım Kampanyası:</strong> TM7 vade farksız 9 taksitle 89.990 ₺ — Thermomix® Karıştırma Kabı 15.990 ₺ yerine 6.000 ₺ · 3 ay Cookidoo® ücretsiz · <a href='#kampanya' style='color:#fff;text-decoration:underline'>İncele</a>";
   });
 
   /* Kampanya geri sayımı — canlı sayaç (bitince gizlenir) */
@@ -289,7 +289,7 @@
       if (digits.length < 10) { showErr("Lütfen geçerli bir telefon numarası yazın (en az 10 hane)."); return; }
       if (errEl) errEl.setAttribute("hidden", "");
 
-      var msg = "Merhaba Zeynep Hanım, Thermomix TM7 Eylül kampanyası ve Yemek Takımı atölyeleri hakkında bilgi almak istiyorum 🙂\n" +
+      var msg = "Merhaba Zeynep Hanım, Thermomix TM7 Kasım kampanyası (9 taksit + Karıştırma Kabı) ve ücretsiz tanıtım atölyeleri hakkında bilgi almak istiyorum 🙂\n" +
         "Adım: " + name + "\nTelefonum: " + phone;
       var num = String(cfg.whatsappNumber).replace(/\D/g, "");
       window.open("https://wa.me/" + num + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
@@ -331,25 +331,40 @@
       '</div>';
     var directory = w.directoryUrl || "#";
     var story = w.storyUrl || "#";
+    /* Tarihi geçen atölyeler otomatik gizlenir (S(...) satırlarındaki gün + workshops.year/month). */
+    var now = new Date();
+    var todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    function isUpcoming(session) {
+      if (!session.d || !w.year || !w.month) return true;
+      return new Date(w.year, w.month - 1, session.d).getTime() >= todayStart;
+    }
+    function isToday(session) {
+      return !!(session.d && w.year && w.month && new Date(w.year, w.month - 1, session.d).getTime() === todayStart);
+    }
+    var endedInfo = (w.monthLabel || "Bu ay") + " ayı atölyeleri bu bölgede tamamlandı. Yeni tarihler için kayıt formunu doldurabilir veya WhatsApp'tan yazabilirsiniz; size özel bir tanıtım planlayalım.";
     var slides = locations.map(function (location, index) {
-      var sessions = location.sessions || [];
+      var allSessions = location.sessions || [];
+      var sessions = allSessions.filter(isUpcoming);
       var form = location.formUrl || directory;
       var ctaLabel = location.ctaLabel || "Bu Şehir İçin Kayıt Ol";
       var scheduleHtml = sessions.length
         ? '<div class="ws-table">' +
-            '<div class="ws-row ws-row-head"><span>📅 Tarih</span><span>🕐 Saat</span><span>📍 Lokasyon</span></div>' +
+            '<div class="ws-row ws-row-head"><span>📅 Tarih</span><span>🕐 Saat</span><span>📍 Yer & Atölye</span></div>' +
             sessions.map(function (session) {
-              return '<div class="ws-row">' +
-                '<span class="ws-date">' + esc(session.date) + '</span>' +
+              var today = isToday(session);
+              return '<div class="ws-row' + (today ? ' ws-row-today' : '') + '">' +
+                '<span class="ws-date">' + esc(session.date) + (today ? ' <em class="ws-today">Bugün</em>' : '') + '</span>' +
                 '<span class="ws-time">' + esc(session.time) + '</span>' +
-                '<span class="ws-place">' + esc(session.place) + '</span></div>';
+                '<span class="ws-place">' + esc(session.place) +
+                  (session.topic ? '<em class="ws-topic">🍴 ' + esc(session.topic) + '</em>' : '') + '</span></div>';
             }).join("") +
           '</div>'
-        : '<div class="ws-contact-card"><span>📍</span><p>' + esc(location.info || "Güncel tarih ve konum için iletişime geçin.") + '</p></div>';
+        : '<div class="ws-contact-card"><span>📍</span><p>' + esc(location.info || (allSessions.length ? endedInfo : "Güncel tarih ve konum için iletişime geçin.")) + '</p></div>';
+      var countHtml = sessions.length ? '<span class="ws-count">' + sessions.length + ' atölye</span>' : "";
       return '<article class="workshop-slide" data-workshop-slide="' + index + '">' +
         '<div class="ws-head"><div><span class="ws-city">' + esc(location.city || "") + '</span>' +
         (location.region ? '<span class="ws-region">' + esc(location.region) + '</span>' : "") + '</div>' +
-        '<span class="ws-free">Ücretsiz Katılım</span></div>' +
+        '<span class="ws-head-tags">' + countHtml + '<span class="ws-free">Ücretsiz Katılım</span></span></div>' +
         scheduleHtml +
         '<div class="ws-form-status">✓ ' + (location.formUrl ? 'Bu bölge için resmî kayıt formu hazır' : 'Kayıt seçeneklerini görüntüleyin') + '</div>' +
         '<div class="ws-actions">' +
@@ -364,6 +379,11 @@
         '<span><strong data-ws-current>1</strong> / ' + locations.length + '</span>' +
         '<button type="button" data-ws-next aria-label="Sonraki şehir">→</button></div></div>' +
       featuresHtml +
+      '<div class="ws-chips" role="tablist" aria-label="Şehir seç">' +
+        locations.map(function (location, index) {
+          return '<button type="button" class="ws-chip' + (index === 0 ? ' active' : '') + '" data-ws-chip="' + index + '">' + esc(location.city || "") + '</button>';
+        }).join("") +
+      '</div>' +
       '<div class="workshops-slider" data-ws-slider>' + slides + '</div>' +
       '<p class="ws-swipe-hint">← Mobilde şehirleri görmek için kaydırın →</p>';
 
@@ -382,7 +402,20 @@
       var slide = slider.querySelector(".workshop-slide");
       if (!slide) return;
       var active = Math.round(slider.scrollLeft / (slide.offsetWidth + 18)) + 1;
-      current.textContent = Math.max(1, Math.min(locations.length, active));
+      active = Math.max(1, Math.min(locations.length, active));
+      current.textContent = active;
+      chips.forEach(function (chip, i) { chip.classList.toggle("active", i === active - 1); });
+      var on = chips[active - 1];
+      if (on && on.parentNode) on.parentNode.scrollTo({ left: on.offsetLeft - on.parentNode.offsetLeft - 24, behavior: "smooth" });
+    });
+    var chips = Array.prototype.slice.call(el.querySelectorAll("[data-ws-chip]"));
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var slide = slider.querySelector(".workshop-slide");
+        if (!slide) return;
+        var index = parseInt(chip.getAttribute("data-ws-chip"), 10) || 0;
+        slider.scrollTo({ left: index * (slide.offsetWidth + 18), behavior: "smooth" });
+      });
     });
   });
 
@@ -785,4 +818,81 @@
       revealEls.forEach(function (el) { el.classList.add("in"); });
     }
   } catch (e) { /* animasyon başarısız olsa bile içerik görünür kalır */ }
+
+  /* ---- Premium katman: ilerleme çizgisi, menü gölgesi, sayı animasyonu, satın alma çubuğu ---- */
+  try {
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var bar = document.createElement("div");
+    bar.className = "scroll-progress";
+    document.body.appendChild(bar);
+    var header = document.querySelector(".site-header");
+
+    /* Sayısal özet: görünür olunca sayılar yukarı sayar */
+    var statEls = document.querySelectorAll(".stat strong");
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      var statIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          statIo.unobserve(en.target);
+          var el = en.target, full = el.textContent, m = full.match(/^(\D*)([\d.]+)(.*)$/);
+          if (!m) return;
+          var target = parseInt(m[2].replace(/\./g, ""), 10), start = null;
+          if (!target) return;
+          function frame(ts) {
+            if (start === null) start = ts;
+            var p = Math.min(1, (ts - start) / 1100), eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = p < 1 ? m[1] + Math.round(target * eased).toLocaleString("tr-TR") + m[3] : full;
+            if (p < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        });
+      }, { threshold: 0.6 });
+      statEls.forEach(function (el) { statIo.observe(el); });
+    }
+
+    /* Sabit satın alma çubuğu (yalnızca ana sayfada) */
+    var buyTarget = document.getElementById("modeller");
+    var heroEl = document.querySelector(".hero");
+    var model = (cfg.models || [])[0];
+    var buybar = null;
+    if (buyTarget && heroEl && model) {
+      var n = parseInt(model.installments, 10) || 0;
+      var base = priceToNum(model.installmentBase || model.price);
+      var priceText = n > 1 ? n + " × " + numToTRY(Math.round(base / n)).replace(" TL", " ₺") + " vade farksız" : esc(model.price);
+      var endTime = cfg.campaignEndsAt ? new Date(cfg.campaignEndsAt).getTime() : NaN;
+      var daysLeft = isNaN(endTime) ? -1 : Math.floor((endTime - Date.now()) / 86400000);
+      var leftText = daysLeft >= 1 ? " · <em>Son " + daysLeft + " gün</em>" : (daysLeft === 0 ? " · <em>Son gün!</em>" : "");
+      buybar = document.createElement("div");
+      buybar.className = "buybar";
+      buybar.setAttribute("role", "region");
+      buybar.setAttribute("aria-label", "Hızlı satın alma");
+      buybar.innerHTML =
+        '<img class="buybar-thumb" src="img/tm7-hero.png" alt="" />' +
+        '<div class="buybar-info"><strong>Thermomix® TM7</strong><span>' + priceText + leftText + '</span></div>' +
+        '<a class="btn btn-whatsapp buybar-wa" href="' + esc(waUrl) + '"' + (waUrl !== "#" ? ' target="_blank" rel="noopener"' : "") + ' aria-label="WhatsApp\'tan sor">✆</a>' +
+        '<a class="btn btn-primary btn-sm" href="#modeller">Satın Al →</a>';
+      document.body.appendChild(buybar);
+    }
+
+    var ticking = false;
+    function onScroll() {
+      ticking = false;
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+      if (header) header.classList.toggle("scrolled", window.scrollY > 8);
+      if (buybar) {
+        var pastHero = heroEl.getBoundingClientRect().bottom < 0;
+        var r = buyTarget.getBoundingClientRect();
+        var atModels = r.top < window.innerHeight * 0.75 && r.bottom > window.innerHeight * 0.25;
+        var atEnd = max - window.scrollY < 160;
+        var show = pastHero && !atModels && !atEnd;
+        buybar.classList.toggle("show", show);
+        document.body.classList.toggle("has-buybar", show);
+      }
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+  } catch (e) { /* süsleme katmanı başarısız olsa bile site çalışır */ }
 })();

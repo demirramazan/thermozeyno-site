@@ -2,6 +2,12 @@
    AYARLAR — Sadece burayı düzenleyin
    ============================================================ */
 
+/* Atölye satırı: S(gün, "Gün adı", "saat", "yer", "özel atölye teması")
+   Gün sayısı (d) sayesinde tarihi geçen atölyeler sitede otomatik gizlenir. */
+function S(d, dayName, time, place, topic) {
+  return { d: d, date: d + " Kasım " + dayName, time: time, place: place, topic: topic || "" };
+}
+
 window.THERMOMIX_CONFIG = {
   /* ---- Danışman ---- */
   advisorName: "Zeynep Demir",
@@ -13,25 +19,24 @@ window.THERMOMIX_CONFIG = {
      {ID} yerine yukarıdaki advisorId otomatik konur. */
   models: [
     {
-      sku: "BN036",
-      name: "Thermomix® TM7 + Thermomix® Yemek Takımı Paketi",
-      tag: "EYLÜL FIRSATI · LEZZETİ TAMAMLAYIN",
-      oldPrice: "96.980,00 TL",
-      price: "92.740,00 TL",
+      sku: "TM7 + Karıştırma Kabı",
+      name: "Thermomix® TM7 + Thermomix® Karıştırma Kabı",
+      tag: "KASIM FIRSATI · İÇİNİZİ ISITAN FIRSAT",
+      oldPrice: "105.980,00 TL",
+      price: "95.990,00 TL",
       /* Taksit vurgusu: aylık tutar bu ikisinden otomatik hesaplanır.
          installmentBase = vade farksız taksite giren tutar (TM7 fiyatı). */
-      installments: 6,
+      installments: 9,
       installmentBase: "89.990,00 TL",
-      image: "img/tm7-yemek-takimi.jpg",
+      image: "img/kampanya-kasim.jpg",
       includes: [
-        "Thermomix® TM7 — vade farksız 6 taksitle 89.990₺ (14.998,33₺/ay)",
-        "Thermomix® Yemek Takımı — kupon koduyla 2.750₺ (liste: 6.990₺ · 4.240₺ tasarruf)",
-        "1-15 Eylül Garanti BBVA Bonus ile 10.000₺ Bonus fırsatı",
-        "İlk kez abonelere 3 ay ücretsiz Cookidoo® üyeliği",
+        "Thermomix® TM7 — vade farksız 9 taksitle 89.990₺ (9.998,89₺/ay)",
+        "Thermomix® Karıştırma Kabı — kupon koduyla 6.000₺ (liste: 15.990₺ · 9.990₺ tasarruf)",
+        "Daha önce yıllık abonelik almamış hesaplara 3 ay ücretsiz Cookidoo®",
         "KDV dahil · ücretsiz kargo"
       ],
-      details: "Kampanya 1 – 30 Eylül 2026 tarihleri arasında geçerlidir. Tanıtımlardan birine katılıp Thermomix® TM7 satın alanlara 6.990₺ değerindeki Thermomix® Yemek Takımı kupon kodu ile sadece 2.750₺! TM7 vade farksız 6 taksitle 89.990₺'dir (14.998,33₺/ay). Ayrıca 1-15 Eylül tarihleri arasında Garanti BBVA Bonus kartınızla Garanti BBVA sanal POS üzerinden 3 takside kadar yapılan işlemlerde 10.000₺ Bonus fırsatı (BonusFlaş katılımı ile). İlk kez Cookidoo® aboneliği alanlara 3 ay ücretsiz üyelik hediye! Diğer kampanyalarla birleştirilemez, stoklarla sınırlıdır.",
-      url: "https://thermomix.vorwerk.com.tr/vorwerk-katalog/t%C3%BCm-%C3%9Cr%C3%BCnler/thermomix-tm7-%28tm7-%2b-thermomix-yemek-takimi%29/p/BN036?danisman={ID}"
+      details: "Kampanya 1 – 30 Kasım 2026 tarihleri arasında geçerlidir. Bağımsız Thermomix® danışmanlarının tanıtımlarından en az birine katılıp aynı tarihlerde Thermomix® TM7 satın alanlara, 15.990₺ değerindeki Thermomix® Karıştırma Kabı size özel kupon koduyla 6.000₺! TM7 vade farksız 9 taksitle 89.990₺'dir (9.998,89₺/ay). Daha önce yıllık Cookidoo® aboneliği satın almamış hesaplara 3 aylık Cookidoo® üyeliği ücretsiz; süre, üyeliğin cihazdan aktive edildiği tarihte başlar. Satın alma sırasında danışmanınızı belirtmeniz zorunludur. Kampanya toplam 2.500 adet TM7 ile sınırlıdır, başka kampanyalarla birleştirilemez; kupon yalnızca Karıştırma Kabı alımında kullanılır, nakde çevrilemez.",
+      url: "https://thermomix.vorwerk.com.tr/products/thermomix-tm7"
     }
   ],
 
@@ -56,10 +61,10 @@ window.THERMOMIX_CONFIG = {
   /* ---- Sosyal medya & iletişim ---- */
   instagramUrl: "https://instagram.com/thermozeyno",
   instagramDmUrl: "https://ig.me/m/thermozeyno",
-  instagramMessage: "Merhaba Zeynep Hanım, Eylül ayı Thermomix TM7 ve Yemek Takımı kampanyası hakkında bilgi almak istiyorum 🙂",
+  instagramMessage: "Merhaba Zeynep Hanım, Kasım ayı Thermomix TM7 ve Karıştırma Kabı kampanyası hakkında bilgi almak istiyorum 🙂",
   youtubeUrl: "https://www.youtube.com/@thermozeyno",
   whatsappNumber: "905464022099",
-  whatsappMessage: "Merhaba Zeynep Hanım, Eylül ayı Thermomix TM7 ve Yemek Takımı kampanyası hakkında bilgi almak istiyorum 🙂",
+  whatsappMessage: "Merhaba Zeynep Hanım, Kasım ayı Thermomix TM7 ve Karıştırma Kabı kampanyası hakkında bilgi almak istiyorum 🙂",
   email: "",
 
   gaMeasurementId: "G-65HE3LLNSQ",
@@ -72,7 +77,19 @@ window.THERMOMIX_CONFIG = {
     { count: 4, reward: "ÜCRETSİZ TM7", free: true }
   ],
 
-  careerApplyUrl: "https://thermomix.vorwerk.com.tr/bizekatilin",
+  /* ---- 4U Kazanç Programı (danisman-ol.html) ---- */
+  consultantProgram: {
+    name: "4U Kazanç Programı",
+    deadline: "2026-12-31T23:59:59+03:00",
+    deadlineLabel: "31 Aralık 2026",
+    oldDeadlineLabel: "31 Ekim",
+    standardTarget: 6,
+    programTarget: 4,
+    devicePrice: 89990,
+    sourceUrl: "https://www.instagram.com/p/DfPihf2jgJn/"
+  },
+
+  careerApplyUrl: "https://thermomix.vorwerk.com.tr/pages/join-us",
 
   manuals: [
     { title: "Thermomix® TM7 Kullanım Kılavuzu", url: "https://thermomix.vorwerk.com.tr/tr/tr/c/dam-home/products/thermomix/FINAL_print_TR_11008_V1.0_CoSy_API_20241213.pdf" },
@@ -85,117 +102,255 @@ window.THERMOMIX_CONFIG = {
   campaignPopup: {
     enabled: true,
     once: true,
-    emoji: "🍽️",
-    title: "Lezzeti Tamamlayın! Eylül Fırsatları",
-    cta: "Kampanyaları & Yemek Takımını Gör →",
+    emoji: "🍂",
+    title: "İçinizi Isıtan Fırsat! Kasım Kampanyası",
+    cta: "9 Taksit & Karıştırma Kabı Fırsatını Gör →",
     target: "#kampanya",
     intervalMs: 6000
   },
 
-  /* ---- ÜCRETSİZ TANITIM ATÖLYELERİ ---- */
+  /* ---- ÜCRETSİZ TANITIM ATÖLYELERİ (Kasım 2026) ----
+     Kaynak: @thermomixtr "Kasım Ayı Thermomix® Atölyeleri" paylaşımı.
+     year/month: tarihi geçen satırların otomatik gizlenmesi için (month: 1-12). */
   workshops: {
-    note: "Şehrinizi seçin, uygun tarihi bulun ve ücretsiz TM7 tadım & tanıtım atölyesinde yerinizi ayırın.",
+    year: 2026,
+    month: 11,
+    monthLabel: "Kasım",
+    note: "Şehrinizi seçin, uygun tarihi bulun ve ücretsiz TM7 Tadım & Tanıtım Atölyesinde yerinizi ayırın.",
     directoryUrl: "https://linktr.ee/thermomixtr",
-    storyUrl: "https://www.instagram.com/p/Dcv4S_kDjfi/",
+    storyUrl: "https://www.instagram.com/p/DfWbBmnju14/",
     locations: [
       {
-        city: "Ankara",
-        region: "GOP & Ümitköy",
-        formUrl: "https://forms.gle/aziYgUMWdVrRwe8y8",
+        city: "İstanbul Anadolu 1",
+        region: "Suadiye · Maltepe · Üsküdar · Beykoz · Ümraniye · Çekmeköy",
+        formUrl: "https://forms.gle/zdNZ46PWth6r72cu7",
         sessions: [
-          { date: "3 Eylül Çarşamba", time: "12.00 – 14.00", place: "Ankara Şube Tanıtım Evi – GOP" },
-          { date: "6 Eylül Cumartesi", time: "13.00 – 15.00", place: "Ankara Şube Tanıtım Evi – GOP" },
-          { date: "10 Eylül Çarşamba", time: "12.00 – 14.00", place: "Cremama Coffee Ümitköy" },
-          { date: "17 Eylül Çarşamba", time: "19.00 – 21.00", place: "Ankara Şube Tanıtım Evi – GOP" },
-          { date: "24 Eylül Çarşamba", time: "12.00 – 14.00", place: "Cremama Coffee Ümitköy" }
+          S(3, "Salı", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(3, "Salı", "19.00 – 21.00", "Suadiye Tanıtım Evi"),
+          S(5, "Perşembe", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(7, "Cumartesi", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(10, "Salı", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(10, "Salı", "19.00 – 21.00", "Suadiye Tanıtım Evi"),
+          S(12, "Perşembe", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(12, "Perşembe", "12.00", "Maltepe Tanıtım & Tadım Atölyesi"),
+          S(14, "Cumartesi", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(17, "Salı", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(17, "Salı", "19.00 – 21.00", "Suadiye Tanıtım Evi"),
+          S(18, "Çarşamba", "12.00", "Üsküdar Tanıtım & Tadım Atölyesi"),
+          S(18, "Çarşamba", "21.00", "Online · Zoom", "Online Yemek Atölyesi"),
+          S(19, "Perşembe", "12.00", "Beykoz Tanıtım & Tadım Atölyesi"),
+          S(19, "Perşembe", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(21, "Cumartesi", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(24, "Salı", "12.00", "Ümraniye Tanıtım & Tadım Atölyesi"),
+          S(24, "Salı", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(24, "Salı", "19.00 – 21.00", "Suadiye Tanıtım Evi"),
+          S(25, "Çarşamba", "12.00", "Çekmeköy Tanıtım & Tadım Atölyesi"),
+          S(26, "Perşembe", "12.00 – 15.00", "Suadiye Tanıtım Evi"),
+          S(28, "Cumartesi", "12.00 – 15.00", "Suadiye Tanıtım Evi")
         ]
       },
       {
-        city: "İstanbul Anadolu",
-        region: "1. Bölge · Suadiye Tanıtım Evi",
-        formUrl: "https://forms.gle/zdNZ46PWth6r72cu7",
-        info: "1–29 Eylül arasında Suadiye Tanıtım Evi'nde gündüz ve akşam seçenekleri bulunuyor. Formdan size uygun seansı seçebilirsiniz."
-      },
-      {
-        city: "İstanbul Anadolu",
-        region: "Şile · Pendik · Maltepe · Zoom",
+        city: "İstanbul Anadolu 2",
+        region: "Şile · Pendik · Tuzla · Online",
         formUrl: "https://forms.gle/yEos1Aw99VQCKBSi9",
         sessions: [
-          { date: "8 Eylül Salı", time: "12.00 – 14.00", place: "Şile Çakıl Coffee" },
-          { date: "9 Eylül Çarşamba", time: "12.00 – 14.00", place: "Pendik Yenişehir Mado" },
-          { date: "10 Eylül Perşembe", time: "12.00 – 14.00", place: "Maltepe Renzo Vita" },
-          { date: "16 Eylül Çarşamba", time: "12.00 – 14.00", place: "Pendik Yenişehir Mado" },
-          { date: "17 Eylül Perşembe", time: "12.00 – 14.00", place: "Maltepe Renzo Vita" },
-          { date: "23 Eylül Çarşamba", time: "12.00 – 14.00", place: "Pendik Yenişehir Mado" },
-          { date: "24 Eylül Perşembe", time: "12.00 – 14.00", place: "Maltepe Renzo Vita" },
-          { date: "24 Eylül Perşembe", time: "21.00", place: "Zoom" }
+          S(9, "Pazartesi", "12.00 – 14.00", "Şile Çakıl Coffee"),
+          S(11, "Çarşamba", "12.00 – 14.00", "Pendik – Yenişehir Mado"),
+          S(11, "Çarşamba", "21.00 – 22.00", "Online"),
+          S(13, "Cuma", "12.00 – 14.00", "Chocolabs – Tuzla"),
+          S(16, "Pazartesi", "12.00 – 14.00", "Şile Çakıl Coffee"),
+          S(18, "Çarşamba", "12.00 – 14.00", "Pendik – Yenişehir Mado"),
+          S(20, "Cuma", "12.00 – 14.00", "Chocolabs – Tuzla"),
+          S(23, "Pazartesi", "12.00 – 14.00", "Şile Çakıl Coffee"),
+          S(25, "Çarşamba", "12.00 – 14.00", "Pendik – Yenişehir Mado"),
+          S(27, "Cuma", "12.00 – 14.00", "Chocolabs – Tuzla")
         ]
       },
       {
-        city: "İstanbul Avrupa",
-        region: "Levent · Maslak · Online",
+        city: "İstanbul Avrupa 1",
+        region: "Levent Tanıtım Evi · DOOR Maslak · Zoom",
         formUrl: "https://forms.gle/yyf66nagbZx8LiXK8",
         sessions: [
-          { date: "2, 3, 4 Eylül", time: "12.00 – 16.00", place: "Levent Tanıtım Evi" },
-          { date: "3 Eylül Perşembe", time: "20.30 – 22.00", place: "Zoom Online" },
-          { date: "8 Eylül Salı", time: "12.00 – 15.00", place: "DOOR Maslak" },
-          { date: "9, 10, 11 Eylül", time: "12.00 – 16.00", place: "Levent Tanıtım Evi" },
-          { date: "15 Eylül Salı", time: "12.00 – 15.00", place: "DOOR Maslak" },
-          { date: "16, 17, 18 Eylül", time: "12.00 – 16.00", place: "Levent Tanıtım Evi" },
-          { date: "22 Eylül Salı", time: "12.00 – 15.00", place: "DOOR Maslak" },
-          { date: "23, 24, 25 Eylül", time: "12.00 – 16.00", place: "Levent Tanıtım Evi" },
-          { date: "29 Eylül Salı", time: "12.00 – 15.00", place: "DOOR Maslak" },
-          { date: "30 Eylül Çarşamba", time: "12.00 – 16.00", place: "Levent Tanıtım Evi" }
+          S(2, "Pazartesi", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(3, "Salı", "12.00 – 16.00", "DOOR Maslak"),
+          S(4, "Çarşamba", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(5, "Perşembe", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(5, "Perşembe", "20.30 – 22.00", "Online · Zoom", "Online Tanıtım Atölyesi"),
+          S(6, "Cuma", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(9, "Pazartesi", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(10, "Salı", "12.00 – 16.00", "DOOR Maslak"),
+          S(11, "Çarşamba", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(12, "Perşembe", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(13, "Cuma", "12.00 – 16.00", "Levent Tanıtım Evi", "Kahvaltı Lezzetleri"),
+          S(14, "Cumartesi", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(16, "Pazartesi", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(17, "Salı", "12.00 – 16.00", "DOOR Maslak"),
+          S(18, "Çarşamba", "12.00 – 16.00", "Levent Tanıtım Evi", "TM7 ile Pizza Atölyesi"),
+          S(19, "Perşembe", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(20, "Cuma", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(23, "Pazartesi", "14.00 – 17.00", "Levent Tanıtım Evi"),
+          S(24, "Salı", "12.00 – 16.00", "DOOR Maslak"),
+          S(25, "Çarşamba", "12.00 – 16.00", "Levent Tanıtım Evi", "Sushi Atölyesi"),
+          S(26, "Perşembe", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(27, "Cuma", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(28, "Cumartesi", "12.00 – 16.00", "Levent Tanıtım Evi"),
+          S(30, "Pazartesi", "14.00 – 17.00", "Levent Tanıtım Evi")
         ]
       },
       {
-        city: "İstanbul Avrupa",
-        region: "Bahçeşehir · Başakşehir · Beylikdüzü · Bayrampaşa · Mimaroba",
+        city: "İstanbul Avrupa 2",
+        region: "Bahçeşehir · Başakşehir · Beylikdüzü · Bayrampaşa · Silivri · Büyükçekmece",
         formUrl: "https://forms.gle/MjeYeWWxD6rUk49w9",
-        info: "2–29 Eylül arasında farklı gün ve mekân seçenekleri bulunuyor. Formu açarak size en yakın atölyeyi seçebilirsiniz."
+        sessions: [
+          S(2, "Pazartesi", "13.00 – 16.00", "Bahçeşehir Tanıtım Evi"),
+          S(3, "Salı", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi", "Vegan Lezzetler Atölyesi"),
+          S(4, "Çarşamba", "12.00 – 15.00", "Başakşehir"),
+          S(5, "Perşembe", "12.00 – 15.00", "Beylikdüzü"),
+          S(5, "Perşembe", "19.00 – 21.00", "Bahçeşehir Tanıtım Evi"),
+          S(6, "Cuma", "14.00 – 16.00", "Bahçeşehir Tanıtım Evi", "Thermomix ile Kahve ve Kahve Yanı Lezzetler"),
+          S(9, "Pazartesi", "13.00 – 16.00", "Bahçeşehir Tanıtım Evi"),
+          S(10, "Salı", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(11, "Çarşamba", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(12, "Perşembe", "12.00 – 15.00", "Bayrampaşa"),
+          S(12, "Perşembe", "20.30 – 22.00", "Online · Zoom", "Online Tanıtım Atölyesi"),
+          S(13, "Cuma", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(16, "Pazartesi", "13.00 – 16.00", "Bahçeşehir Tanıtım Evi"),
+          S(17, "Salı", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi", "Minik Şeflerle Pizza ve Çikolatalı Lezzetler"),
+          S(17, "Salı", "19.00 – 21.00", "Bahçeşehir Tanıtım Evi"),
+          S(18, "Çarşamba", "12.00 – 15.00", "Silivri"),
+          S(19, "Perşembe", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi", "Börek Atölyesi"),
+          S(20, "Cuma", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(21, "Cumartesi", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(23, "Pazartesi", "13.00 – 16.00", "Bahçeşehir Tanıtım Evi"),
+          S(24, "Salı", "12.00 – 15.00", "Büyükçekmece"),
+          S(25, "Çarşamba", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi", "Taze Makarna Atölyesi"),
+          S(25, "Çarşamba", "19.00 – 21.00", "Bahçeşehir Tanıtım Evi"),
+          S(26, "Perşembe", "12.00 – 15.00", "Beylikdüzü"),
+          S(27, "Cuma", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(28, "Cumartesi", "12.00 – 15.00", "Bahçeşehir Tanıtım Evi"),
+          S(29, "Pazar", "12.00 – 15.00", "Levent Tanıtım Evi", "İşitme Engelliler için Tadım & Tanıtım Atölyesi")
+        ]
       },
       {
-        city: "İstanbul Avrupa",
-        region: "Bahçelievler · Küçükçekmece · Arnavutköy · Fatih",
+        city: "İstanbul Avrupa 3",
+        region: "Fatih · Arnavutköy · Bakırköy · Küçükçekmece · Bağcılar · Bahçelievler",
         formUrl: "https://forms.gle/FPQtpfmvnspW3QQt7",
-        info: "2–28 Eylül arasında dört farklı ilçede ücretsiz atölyeler bulunuyor. Formdan ilçe ve tarih seçerek kayıt talebi oluşturabilirsiniz."
+        sessions: [
+          S(2, "Pazartesi", "13.00 – 15.00", "Fatih"),
+          S(3, "Salı", "15.00 – 17.00", "Arnavutköy"),
+          S(4, "Çarşamba", "12.00 – 14.00", "Bakırköy"),
+          S(5, "Perşembe", "12.00 – 14.00", "Küçükçekmece"),
+          S(7, "Cumartesi", "12.00 – 14.00", "Bağcılar"),
+          S(9, "Pazartesi", "13.00 – 15.00", "Fatih"),
+          S(11, "Çarşamba", "12.00 – 14.00", "Bahçelievler"),
+          S(12, "Perşembe", "12.00 – 14.00", "Bağcılar"),
+          S(14, "Cumartesi", "12.00 – 14.00", "Arnavutköy"),
+          S(16, "Pazartesi", "13.00 – 15.00", "Fatih"),
+          S(17, "Salı", "15.00 – 17.00", "Arnavutköy"),
+          S(18, "Çarşamba", "12.00 – 14.00", "Bakırköy"),
+          S(18, "Çarşamba", "20.30 – 22.00", "Online", "Online Tanıtım Atölyesi"),
+          S(19, "Perşembe", "12.00 – 14.00", "Küçükçekmece"),
+          S(23, "Pazartesi", "13.00 – 15.00", "Fatih"),
+          S(24, "Salı", "15.00 – 17.00", "Arnavutköy"),
+          S(25, "Çarşamba", "12.00 – 14.00", "Bahçelievler"),
+          S(26, "Perşembe", "12.00 – 14.00", "Bağcılar"),
+          S(28, "Cumartesi", "12.00 – 14.00", "Bahçelievler")
+        ]
+      },
+      {
+        city: "Ankara",
+        region: "Ankara Tanıtım Evi · Ümitköy · Macunköy",
+        formUrl: "https://forms.gle/aziYgUMWdVrRwe8y8",
+        sessions: [
+          S(7, "Cumartesi", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(10, "Salı", "12.00 – 14.00", "Ankara Tanıtım Evi"),
+          S(12, "Perşembe", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(14, "Cumartesi", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(17, "Salı", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(18, "Çarşamba", "12.00 – 14.00", "Ümitköy Cremama Coffee"),
+          S(19, "Perşembe", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(20, "Cuma", "19.00 – 21.00", "Ankara Tanıtım Evi"),
+          S(21, "Cumartesi", "13.00 – 15.00", "Ankara Tanıtım Evi"),
+          S(24, "Salı", "12.00 – 14.00", "Ankara Tanıtım Evi"),
+          S(25, "Çarşamba", "12.00 – 14.00", "Macunköy Lady Desert & Drink"),
+          S(28, "Cumartesi", "13.00 – 15.00", "Ankara Tanıtım Evi")
+        ]
       },
       {
         city: "İzmir",
-        region: "Alsancak · Foça · Urla · Zoom",
+        region: "Alsancak · Karşıyaka · Gaziemir · Narlıdere · Bornova · Online",
         formUrl: "https://forms.gle/apMTrW84eqKrAJrt9",
         sessions: [
-          { date: "8 Eylül Salı", time: "12.30 – 15.00", place: "Alsancak Tanıtım Evi" },
-          { date: "9 Eylül Çarşamba", time: "14.00 – 17.00", place: "Foça" },
-          { date: "9 Eylül Çarşamba", time: "21.00", place: "Zoom" },
-          { date: "10, 15, 17 Eylül", time: "12.30 – 15.00", place: "Alsancak Tanıtım Evi" },
-          { date: "22 Eylül Salı", time: "14.00 – 17.00", place: "Alsancak Tanıtım Evi" },
-          { date: "23 Eylül Çarşamba", time: "14.00 – 17.00", place: "Urla" },
-          { date: "23 Eylül Çarşamba", time: "21.00", place: "Zoom" },
-          { date: "24 Eylül Perşembe", time: "12.30 – 15.00", place: "Alsancak Tanıtım Evi" },
-          { date: "29 Eylül Cuma", time: "14.00 – 17.00", place: "Alsancak Tanıtım Evi" }
+          S(4, "Çarşamba", "14.00", "Gaziemir Tanıtım Atölyesi"),
+          S(4, "Çarşamba", "21.00", "Online Tanıtım Atölyesi"),
+          S(5, "Perşembe", "15.00", "Alsancak Tanıtım Atölyesi"),
+          S(10, "Salı", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(12, "Perşembe", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(12, "Perşembe", "13.00", "Karşıyaka Tanıtım Atölyesi"),
+          S(17, "Salı", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(18, "Çarşamba", "14.00", "Narlıdere Tanıtım Atölyesi"),
+          S(18, "Çarşamba", "21.00", "Online Tanıtım Atölyesi"),
+          S(19, "Perşembe", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(19, "Perşembe", "13.00", "Karşıyaka Tanıtım Atölyesi"),
+          S(20, "Cuma", "14.00", "Alsancak", "Mezeler Atölyesi"),
+          S(24, "Salı", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(25, "Çarşamba", "12.00", "Bornova Tanıtım Atölyesi"),
+          S(25, "Çarşamba", "14.00", "Gaziemir Tanıtım Atölyesi"),
+          S(25, "Çarşamba", "21.00", "Online Tanıtım Atölyesi"),
+          S(26, "Perşembe", "12.30", "Alsancak Tanıtım Atölyesi"),
+          S(26, "Perşembe", "13.00", "Karşıyaka Tanıtım Atölyesi")
         ]
       },
       {
         city: "Antalya",
-        region: "Konyaaltı · Finike",
+        region: "Antalya Tanıtım Evi",
         formUrl: "https://forms.gle/PjJrenFSJLKz5fLUA",
         sessions: [
-          { date: "2, 4, 9, 10, 11 Eylül", time: "13.00 – 16.00", place: "Antalya Tanıtım Evi – Konyaaltı" },
-          { date: "12, 15, 16, 17, 19 Eylül", time: "13.00 – 16.00", place: "Antalya Tanıtım Evi – Konyaaltı" },
-          { date: "22 Eylül Salı", time: "13.00 – 16.00", place: "Luna Event Finike" }
+          S(4, "Çarşamba", "13.00 – 16.00", "Antalya Tanıtım Evi", "Pizza Atölyesi"),
+          S(10, "Salı", "13.00 – 16.00", "Antalya Tanıtım Evi", "Salata ve Mezeler Atölyesi"),
+          S(11, "Çarşamba", "13.00 – 16.00", "Antalya Tanıtım Evi"),
+          S(12, "Perşembe", "13.00 – 16.00", "Antalya Tanıtım Evi", "Kış Çorbaları Atölyesi"),
+          S(13, "Cuma", "13.00 – 16.00", "Antalya Tanıtım Evi"),
+          S(19, "Perşembe", "13.00 – 16.00", "Antalya Tanıtım Evi"),
+          S(20, "Cuma", "13.00 – 16.00", "Antalya Tanıtım Evi", "Makarna Atölyesi"),
+          S(24, "Salı", "13.00 – 16.00", "Antalya Tanıtım Evi")
         ]
       },
       {
         city: "Adana",
-        region: "Adana · Zoom",
+        region: "Adana",
         formUrl: "https://forms.gle/yjymvuvP9xZZhTsJ7",
         sessions: [
-          { date: "3 Eylül Çarşamba", time: "21.00 – 23.00", place: "Zoom Online" },
-          { date: "8 Eylül Salı", time: "14.00 – 16.00", place: "Adana" },
-          { date: "15 Eylül Salı", time: "14.00 – 16.00", place: "Adana" },
-          { date: "23 Eylül Çarşamba", time: "21.00 – 23.00", place: "Zoom Online" },
-          { date: "24 Eylül Perşembe", time: "14.00 – 16.00", place: "Adana" }
+          S(5, "Perşembe", "13.00 – 15.00", "Adana"),
+          S(7, "Cumartesi", "13.00 – 15.00", "Adana"),
+          S(12, "Perşembe", "13.00 – 15.00", "Adana"),
+          S(19, "Perşembe", "13.00 – 15.00", "Adana"),
+          S(25, "Çarşamba", "13.00 – 15.00", "Adana")
+        ]
+      },
+      {
+        city: "Bursa",
+        region: "Bursa · Karacabey · Gemlik · Mudanya · Balıkesir",
+        formUrl: "https://forms.gle/zF7ASjwjgEhDxLnT8",
+        sessions: [
+          S(10, "Salı", "13.00 – 16.00", "Karacabey – Kafe"),
+          S(16, "Pazartesi", "13.00 – 16.00", "Sembol Ocakbaşı Restaurant"),
+          S(17, "Salı", "13.00 – 16.00", "Gemlik – Kafe"),
+          S(18, "Çarşamba", "13.00 – 16.00", "Millet Mahallesi – Kafe"),
+          S(20, "Cuma", "13.00 – 16.00", "Balıkesir – Kafe"),
+          S(25, "Çarşamba", "13.00 – 16.00", "Mudanya Kafe")
+        ]
+      },
+      {
+        city: "Kocaeli",
+        region: "Başiskele · İzmit · Çayırova",
+        formUrl: "https://forms.gle/zF7ASjwjgEhDxLnT8",
+        sessions: [
+          S(10, "Salı", "12.00 – 14.00", "Başiskele – İskele Naila Cafe"),
+          S(12, "Perşembe", "12.00 – 14.00", "İzmit – Caffe Negra"),
+          S(17, "Salı", "19.00 – 21.00", "Mutlukent Çayırova – Elite Mutfak"),
+          S(19, "Perşembe", "12.00 – 14.00", "İzmit – Caffe Negra"),
+          S(24, "Salı", "12.00 – 14.00", "Başiskele – Monia Cafe")
         ]
       },
       {
@@ -203,93 +358,115 @@ window.THERMOMIX_CONFIG = {
         region: "Mihrimah Kahve · Zoom",
         formUrl: "https://forms.gle/rK765FN4tkLwA7tn6",
         sessions: [
-          { date: "5 Eylül Cumartesi", time: "20.00 – 22.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "8 Eylül Salı", time: "14.00 – 16.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "9 Eylül Çarşamba", time: "20.00 – 22.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "14 Eylül Pazartesi", time: "20.00 – 22.00", place: "Zoom Online" },
-          { date: "16 Eylül Çarşamba", time: "20.00 – 22.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "17 Eylül Perşembe", time: "13.30 – 15.30", place: "Kayseri Mihrimah Kahve" },
-          { date: "23 Eylül Çarşamba", time: "20.00 – 22.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "24 Eylül Perşembe", time: "20.00 – 22.00", place: "Zoom Online" },
-          { date: "25 Eylül Cuma", time: "20.00 – 22.00", place: "Kayseri Mihrimah Kahve" },
-          { date: "26 Eylül Cumartesi", time: "13.30 – 15.30", place: "Kayseri Mihrimah Kahve" }
+          S(3, "Salı", "20.00 – 22.00", "Online · Zoom"),
+          S(4, "Çarşamba", "20.00 – 22.00", "Kayseri Mihrimah Kahve", "Fit Lezzetler Atölyesi"),
+          S(6, "Cuma", "13.30 – 15.30", "Kayseri Mihrimah Kahve", "Ekşi Maya Ekmek Atölyesi"),
+          S(6, "Cuma", "20.00 – 22.00", "Kayseri Mihrimah Kahve", "Arabaşı Atölyesi"),
+          S(9, "Pazartesi", "20.00 – 22.00", "Online · Zoom", "Ana Yemekler Atölyesi"),
+          S(10, "Salı", "20.00 – 22.00", "Online · Zoom"),
+          S(13, "Cuma", "20.00 – 22.00", "Kayseri Mihrimah Kahve", "Tatlıdan Makarnaya Lezzet Atölyesi"),
+          S(16, "Pazartesi", "20.00 – 22.00", "Online · Zoom"),
+          S(17, "Salı", "13.30 – 15.30", "Kayseri Mihrimah Kahve", "Tatlı Atölyesi"),
+          S(17, "Salı", "20.00 – 22.00", "Online · Zoom"),
+          S(19, "Perşembe", "20.00 – 22.00", "Kayseri Mihrimah Kahve", "Pilav Atölyesi"),
+          S(20, "Cuma", "20.00 – 22.00", "Kayseri Mihrimah Kahve", "Ekmek Üstü Lezzetler Atölyesi"),
+          S(24, "Salı", "20.00 – 22.00", "Online · Zoom"),
+          S(27, "Cuma", "19.00 – 21.00", "Kayseri Mihrimah Kahve"),
+          S(28, "Cumartesi", "13.30 – 15.30", "Kayseri Mihrimah Kahve", "Ketojenik Beslenme Atölyesi")
         ]
       },
       {
         city: "Konya",
-        region: "Konya Tanıtım Evi · Online",
+        region: "Konya Tanıtım Evi · Zoom",
         formUrl: "https://forms.gle/shNbeoq1nRLoAZB1A",
         sessions: [
-          { date: "2 Eylül Çarşamba", time: "13.30 – 15.30", place: "Konya Tanıtım Evi" },
-          { date: "3 Eylül Perşembe", time: "21.00 – 22.00", place: "Online" },
-          { date: "5, 8 Eylül", time: "14.00 – 16.00", place: "Konya Tanıtım Evi" },
-          { date: "8 Eylül Salı", time: "21.00 – 22.00", place: "Online" },
-          { date: "9 Eylül Çarşamba", time: "20.00 – 22.00", place: "Konya Tanıtım Evi" },
-          { date: "10 Eylül Perşembe", time: "13.00 – 15.00", place: "Konya Tanıtım Evi" },
-          { date: "11, 12 Eylül", time: "14.00 – 16.00", place: "Konya Tanıtım Evi" },
-          { date: "17 Eylül Perşembe", time: "20.00 – 22.00", place: "Konya Tanıtım Evi" },
-          { date: "18, 20, 22 Eylül", time: "14.00 – 16.00", place: "Konya Tanıtım Evi" },
-          { date: "23, 24 Eylül", time: "13.00 – 15.00", place: "Konya Tanıtım Evi" },
-          { date: "25 Eylül Cuma", time: "20.00 – 22.00", place: "Konya Tanıtım Evi" },
-          { date: "26 Eylül Cumartesi", time: "14.00 – 16.00", place: "Konya Tanıtım Evi" }
+          S(3, "Salı", "14.00", "Konya Tanıtım Evi", "Glutensiz"),
+          S(4, "Çarşamba", "18.00", "Konya Tanıtım Evi", "Sıcak Yemekler"),
+          S(5, "Perşembe", "12.00", "Konya Tanıtım Evi"),
+          S(5, "Perşembe", "20.00", "Zoom", "Online Tanıtım"),
+          S(7, "Cumartesi", "13.30", "Konya Tanıtım Evi", "Ekmek Atölyesi"),
+          S(8, "Pazar", "14.00", "Konya Tanıtım Evi"),
+          S(12, "Perşembe", "12.00", "Konya Tanıtım Evi"),
+          S(13, "Cuma", "19.00", "Konya Tanıtım Evi"),
+          S(15, "Pazar", "14.00", "Konya Tanıtım Evi"),
+          S(17, "Salı", "13.30", "Konya Tanıtım Evi", "Fast Food Atölyesi"),
+          S(18, "Çarşamba", "13.00", "Konya Tanıtım Evi", "Kore Yemekleri"),
+          S(19, "Perşembe", "13.00", "Konya Tanıtım Evi", "Pizza Atölyesi"),
+          S(21, "Cumartesi", "18.00", "Konya Tanıtım Evi", "Balık Atölyesi"),
+          S(24, "Salı", "13.00", "Konya Tanıtım Evi", "Diyet Tarifler"),
+          S(25, "Çarşamba", "18.00", "Konya Tanıtım Evi", "Makarna Atölyesi"),
+          S(26, "Perşembe", "13.00", "Konya Tanıtım Evi", "İtalyan Lezzetleri"),
+          S(26, "Perşembe", "20.00", "Zoom", "Online Tanıtım"),
+          S(27, "Cuma", "15.00", "Konya Tanıtım Evi", "Beş Çayı Atölyesi"),
+          S(28, "Cumartesi", "13.00", "Konya Tanıtım Evi")
         ]
       },
       {
-        city: "Diğer Şehirler",
-        region: "Balıkesir · Bursa · Sivas · Mersin · Aksaray · Nevşehir · Gaziantep · Afyon · Hatay · Osmaniye · Sakarya · Kocaeli · Karaman · Eskişehir · Muğla",
+        city: "Manisa",
+        region: "Güzelyurt",
         formUrl: "https://forms.gle/zF7ASjwjgEhDxLnT8",
         sessions: [
-          { date: "4 Eylül Cuma", time: "12.00 – 15.00", place: "Edremit – Gabdonia Cafe" },
-          { date: "7 Eylül Pazartesi", time: "12.00 – 15.00", place: "Bursa – Sembol Ocakbaşı Odunluk" },
-          { date: "11 Eylül Cuma", time: "13.30 – 15.00", place: "Sivas – Yamaç Cafe" },
-          { date: "11 Eylül Cuma", time: "14.00 – 16.00", place: "Mersin" },
-          { date: "15 Eylül Salı", time: "13.00 – 15.00", place: "Aksaray" },
-          { date: "18 Eylül Cuma", time: "12.30 – 14.30", place: "Nevşehir – Nevada Coffee" },
-          { date: "18 Eylül Cuma", time: "12.00 – 15.00", place: "Gaziantep" },
-          { date: "18 Eylül Cuma", time: "14.00 – 16.00", place: "Afyon – Bonovita Cafe" },
-          { date: "18 Eylül Cuma", time: "14.00 – 16.00", place: "Hatay" },
-          { date: "21 Eylül Pazartesi", time: "18.00 – 20.00", place: "Osmaniye" },
-          { date: "22 Eylül Salı", time: "12.00", place: "Sakarya" },
-          { date: "22 Eylül Salı", time: "19.00 – 21.00", place: "Kocaeli" },
-          { date: "24 Eylül Perşembe", time: "13.00 – 15.00", place: "Karaman" },
-          { date: "24 Eylül Perşembe", time: "14.00 – 16.00", place: "Eskişehir – Ojo Cafe" },
-          { date: "25 Eylül Cuma", time: "14.00 – 17.00", place: "Ayvalık – Balıkesir" },
-          { date: "26 Eylül Cumartesi", time: "14.00 – 16.00", place: "Gaziantep" },
-          { date: "26 Eylül Cumartesi", time: "14.00 – 17.00", place: "Fethiye" },
-          { date: "29 Eylül Salı", time: "12.00 – 14.00", place: "Kocaeli" }
+          S(10, "Salı", "18.00", "Manisa Güzelyurt Tanıtım Atölyesi"),
+          S(17, "Salı", "18.00", "Manisa Güzelyurt Tanıtım Atölyesi")
+        ]
+      },
+      {
+        city: "Diğer İller",
+        region: "Aksaray · Mersin · Eskişehir · Elazığ · Sakarya · Gaziantep · Karaman · Akhisar · Nevşehir · Denizli · Aydın · Muğla · Osmaniye · Hatay · Kırşehir",
+        formUrl: "https://forms.gle/zF7ASjwjgEhDxLnT8",
+        sessions: [
+          S(6, "Cuma", "13.00", "Aksaray"),
+          S(10, "Salı", "14.00 – 16.00", "Mersin"),
+          S(11, "Çarşamba", "13.00 – 15.00", "Eskişehir"),
+          S(12, "Perşembe", "12.30 – 15.30", "Yamaç Cafe"),
+          S(16, "Pazartesi", "13.00 – 15.00", "Elazığ – Harput Dibek Kahve"),
+          S(17, "Salı", "12.00", "Sakarya"),
+          S(17, "Salı", "13.00 – 15.00", "Gaziantep"),
+          S(20, "Cuma", "13.00", "Karaman"),
+          S(20, "Cuma", "13.00 – 15.00", "Doku Cafe"),
+          S(21, "Cumartesi", "14.00", "Akhisar"),
+          S(21, "Cumartesi", "13.30 – 15.30", "Nevşehir – Nevada Coffee"),
+          S(23, "Pazartesi", "12.00", "Aydın"),
+          S(23, "Pazartesi", "18.00", "Denizli"),
+          S(24, "Salı", "13.00", "Fethiye"),
+          S(24, "Salı", "14.00 – 16.00", "Osmaniye"),
+          S(24, "Salı", "19.00", "Muğla Dalaman"),
+          S(26, "Perşembe", "13.00 – 15.00", "Hatay"),
+          S(27, "Cuma", "13.00 – 15.00", "Kırşehir – Afife Sanat Atölyesi"),
+          S(28, "Cumartesi", "12.00", "Sakarya")
         ]
       },
       {
         city: "Online Tanıtım",
         region: "Türkiye Geneli · Zoom",
-        formUrl: "https://thermomix.vorwerk.com.tr/demo",
+        formUrl: "https://thermomix.vorwerk.com.tr/pages/tm7-book-a-demo#form",
         ctaLabel: "Online Tanıtım Talep Et",
-        info: "Bulunduğunuz şehirden ücretsiz TM7 tanıtımına katılın; cihazı, Cookidoo®'yu ve kampanyaları canlı olarak keşfedin."
+        info: "Bulunduğunuz şehirden ücretsiz TM7 tanıtımına katılın; cihazı, Cookidoo®'yu ve Kasım kampanyasını canlı olarak keşfedin. Dilerseniz bana WhatsApp'tan yazın, size özel bir Zoom tanıtımı planlayalım."
       }
     ]
   },
 
   /* ---- KAMPANYA GERİ SAYIMI ---- */
-  campaignEndsAt: "2026-09-30T23:59:59+03:00",
-  campaignStockNote: "Stoklarla sınırlı kampanya",
+  campaignEndsAt: "2026-11-30T23:59:59+03:00",
+  campaignStockNote: "Toplam 2.500 adet TM7 ile sınırlı",
 
   /* ---- HIZLI İLETİŞİM FORMU ---- */
   leadForm: {
     enabled: true,
     title: "30 Saniyede Bilgi Alın",
-    sub: "Adınızı ve telefonunuzu bırakın — Yemek Takımı kampanya kodunu ve size en yakın ücretsiz tanıtım tarihini ileteyim.",
+    sub: "Adınızı ve telefonunuzu bırakın — Karıştırma Kabı kupon kodunu ve size en yakın ücretsiz tanıtım tarihini ileteyim.",
     buttonText: "Bilgi İstiyorum →",
     note: "Bilgileriniz kimseyle paylaşılmaz. Gönder'e bastığınızda WhatsApp hazır mesajla açılır."
   },
 
   /* ---- AYIN KAMPANYALARI & HEDİYELERİ ---- */
-  campaignPeriod: "1 – 30 Eylül 2026 · Sınırlı Stok",
+  campaignPeriod: "1 – 30 Kasım 2026 · 2.500 Adetle Sınırlı",
   campaigns: [
-    { icon: "💳", title: "Vade Farksız 6 Taksit: 14.998₺/Ay", desc: "Thermomix® TM7'ye bütçenizi zorlamadan, vade farksız 6 taksitle ayda sadece 14.998₺ ödeyerek sahip olun!", tag: "ÖNE ÇIKAN FİRSAT" },
-    { icon: "🍽️", image: "img/tm7-yemek-takimi.jpg", title: "Yemek Takımı 6.990₺ Yerine 2.750₺", desc: "1–30 Eylül tanıtıma katılıp TM7 alanlara, 6.990₺ değerindeki Thermomix® Yemek Takımı kupon koduyla sadece 2.750₺! (4.240₺ Tasarruf)", tag: "LEZZETİ TAMAMLAYIN" },
-    { icon: "🏦", title: "10.000₺ Garanti Bonus", desc: "1–15 Eylül arası Garanti BBVA Bonus kartınızla, sanal POS üzerinden 3 takside kadar alışverişte 10.000₺ Bonus. Alışverişten önce BonusFlaş'ta \"Kampanyaya Katıl\"a tıklamayı unutmayın.", tag: "BONUS (1-15 EYLÜL)" },
-    { icon: "📲", title: "3 Ay Ücretsiz Cookidoo®", desc: "İlk defa Cookidoo® aboneliği alanlara 3 aylık ücretsiz Cookidoo® üyeliği hediye.", tag: "HEDİYE" },
-    { icon: "✨", title: "Şık Sofralar & Ziyafetler", desc: "Eylül boyunca Thermomix® TM7 ile pişirdiğiniz eşsiz lezzetleri şık Yemek Takımı ile sunun.", tag: "ÖZEL KOLEKSİYON" },
+    { icon: "💳", title: "Vade Farksız 9 Taksit: 9.999₺/Ay", desc: "Thermomix® TM7'ye bütçenizi zorlamadan, vade farksız 9 taksitle ayda yaklaşık 9.999₺ ödeyerek sahip olun (toplam 89.990₺).", tag: "ÖNE ÇIKAN FIRSAT" },
+    { icon: "🥣", title: "Karıştırma Kabı 15.990₺ Yerine 6.000₺", desc: "1–30 Kasım'da tanıtıma katılıp TM7 alanlara, 15.990₺ değerindeki ikinci Thermomix® Karıştırma Kabı size özel kupon koduyla 6.000₺! (9.990₺ tasarruf)", tag: "İÇİNİZİ ISITAN FIRSAT" },
+    { icon: "📲", title: "3 Ay Ücretsiz Cookidoo®", desc: "Daha önce yıllık Cookidoo® aboneliği almamış hesaplara 3 aylık üyelik ücretsiz. Süre, üyeliği cihazdan aktive ettiğiniz gün başlar.", tag: "HEDİYE" },
+    { icon: "🎪", title: "Önce Tanıtım, Sonra Fırsat", desc: "Kampanya için satın almadan önce bir tanıtıma katılmak ve siparişte danışmanınızı belirtmek şart. Size en yakın ücretsiz atölyeyi birlikte seçelim.", tag: "KOŞUL" },
+    { icon: "🍲", title: "İki Kap, Kesintisiz Mutfak", desc: "Çorba bir kapta pişerken tatlıyı diğerinde hazırlayın. İkinci Karıştırma Kabı ile yıkama beklemeden tarife devam edin.", tag: "NEDEN İKİNCİ KAP?" },
     { icon: "👩‍🍳", title: "Hanımlara Özel Ücretsiz Demo", desc: "Yüz yüze veya Zoom ile, yalnızca hanımlara özel ücretsiz tanıtım demosu ve tarif danışmanlığı.", tag: "HANIMLARA ÖZEL" }
   ],
 
@@ -309,7 +486,7 @@ window.THERMOMIX_CONFIG = {
     { icon: "🦋", title: "Çırpma Teli (Kelebek)", desc: "Krema, yumurta akı ve hafif karışımları çırpmak için." },
     { icon: "🥄", title: "Spatula", desc: "Güvenli karıştırma ve hazneyi temizleme için özel spatula." },
     { icon: "🧺", title: "Süzgeç Sepeti", desc: "Süzme, haşlama ve yıkama işlemleri için pratik sepet." },
-    { icon: "🍶", title: "Karıştırma Kabı", desc: "Yedek/ikinci hazne ile kesintisiz mutfak akışı." }
+    { icon: "🥣", title: "Karıştırma Kabı", desc: "İkinci hazne ile kesintisiz mutfak akışı. Kasım'da TM7 alanlara kuponla 15.990₺ yerine 6.000₺." }
   ],
 
   /* ---- TEK CİHAZ, KOCA BİR MUTFAK ---- */
@@ -369,9 +546,10 @@ window.THERMOMIX_CONFIG = {
       { emoji: "🎬", title: "Hikayenin Tamamı", text: "TM7 öne çıkanlarını Instagram'da izle", bg: "linear-gradient(160deg,#1f2937,#4b5563)" }
     ] },
     { label: "@thermomixtr", emoji: "🟢", link: "https://instagram.com/thermomixtr" },
-    { label: "Yemek Takımı", emoji: "🍽️", link: "#kampanya" },
+    { label: "Karıştırma Kabı", emoji: "🥣", link: "#kampanya" },
     { label: "Kampanya", emoji: "🎁", link: "#kampanya" },
     { label: "Atölyeler", emoji: "🎪", link: "#atolyeler" },
+    { label: "Danışman Ol", emoji: "💚", link: "danisman-ol.html" },
     { label: "Demo", emoji: "🎬", link: "#danisman" }
   ]
 };
