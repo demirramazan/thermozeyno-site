@@ -100,7 +100,7 @@ window.THERMOMIX_CONFIG = {
 
   /* ---- AÇILIŞ KAMPANYA POPUP'I ---- */
   campaignPopup: {
-    enabled: true,
+    enabled: false,
     once: true,
     emoji: "🍂",
     title: "İçinizi Isıtan Fırsat! Kasım Kampanyası",
