@@ -32,7 +32,10 @@ Ardından tarayıcıda http://localhost:8000 adresini açın (Windows'ta `siteyi
 
 ## Yayın
 
-- **Vercel:** https://thermozeyno.vercel.app
-- **GitHub Pages:** depo ayarlarında *Settings → Pages → Deploy from a branch → `master` / `(root)`* seçildiğinde `https://demirramazan.github.io/thermozeyno-site/` adresinde yayınlanır.
+Site **GitHub Pages** ile yayınlanır ve **https://thermozeyno.com** adresinden açılır. `master` dalına gönderilen (push) her değişiklik birkaç dakika içinde yayına girer.
+
+- Alan adı Hostinger'da; DNS kayıtları GitHub Pages'i gösterir (kök alan için GitHub'ın 4 A kaydı, `www` için `demirramazan.github.io` CNAME kaydı).
+- Depo kökündeki `CNAME` dosyası alan adını GitHub'a bildirir; silinmemelidir.
+- `*.vercel.app` adresleri Türkiye'de birçok ağda erişim engelinde olduğu için Vercel yayını bırakıldı.
 
 Thermomix® ve Cookidoo®, Vorwerk'in tescilli markalarıdır. Bu site bağımsız bir danışmana aittir; satış ve ödeme resmî Vorwerk Türkiye kanalı üzerinden yapılır.

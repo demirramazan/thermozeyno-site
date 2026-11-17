@@ -15,7 +15,7 @@ ADIM 1 — SİTEYİ YAYINLA (önce bu olmalı)
 1. https://app.netlify.com/drop aç.
 2. thermomix-site klasörünü (içindeki tüm dosyaları) sürükle-bırak.
 3. Ücretsiz hesap aç (Google ile) -> Site configuration -> Change site name
-   -> "thermozeyno" yaz.  Adres: https://thermozeyno.vercel.app
+   -> "thermozeyno" yaz.  Adres: https://thermozeyno.com
    (Alınmışsa: thermozeyno-tm7 gibi bir alternatif seç ve bana söyle,
     SEO dosyalarındaki adresi güncelleyeyim.)
 
@@ -23,7 +23,7 @@ ADIM 1 — SİTEYİ YAYINLA (önce bu olmalı)
 ADIM 2 — GOOGLE SEARCH CONSOLE
 ----------------------------------------------------------
 1. https://search.google.com/search-console adresine Google hesabınla gir.
-2. "Özellik ekle" -> "URL ön eki" -> https://thermozeyno.vercel.app yaz.
+2. "Özellik ekle" -> "URL ön eki" -> https://thermozeyno.com yaz.
 3. DOĞRULAMA: "HTML etiketi" yöntemini seç. Google sana şöyle bir kod verir:
       <meta name="google-site-verification" content="XXXXXXXX" />
 4. Bu kodu bana ver YA DA index.html içinde şu satırı bul:
@@ -36,14 +36,14 @@ ADIM 2 — GOOGLE SEARCH CONSOLE
 ADIM 3 — SİTE HARİTASI (SITEMAP) GÖNDER
 ----------------------------------------------------------
 1. Search Console -> sol menü "Site Haritaları".
-2. Şunu ekle:  sitemap.xml   (tam adres: https://thermozeyno.vercel.app/sitemap.xml)
+2. Şunu ekle:  sitemap.xml   (tam adres: https://thermozeyno.com/sitemap.xml)
 3. "Gönder" de. (Site zaten sitemap.xml ve robots.txt ile hazır.)
 
 ----------------------------------------------------------
 ADIM 4 — DİZİNE EKLETME (hızlandırır)
 ----------------------------------------------------------
 1. Search Console üstteki arama kutusuna ana sayfanı yaz:
-   https://thermozeyno.vercel.app/
+   https://thermozeyno.com/
 2. "Dizine ekleme isteğinde bulun" tıkla. Aynısını şu sayfalar için yap:
    /danisman-ol.html  ve  /siparis-adimlari.html
 
@@ -68,7 +68,7 @@ Google Analytics (ücretsiz) ile ziyaretçi sayısını ve SATIN AL /
 DANIŞMAN / WHATSAPP linklerine kaç kişi tıkladığını görürsün.
 
 1. https://analytics.google.com aç -> ücretsiz hesap/"Mülk" oluştur.
-2. Platform olarak "Web" seç, site adresi: https://thermozeyno.vercel.app
+2. Platform olarak "Web" seç, site adresi: https://thermozeyno.com
 3. Sana bir "Ölçüm Kimliği" verir:  G-XXXXXXXXXX
 4. Bu kodu config.js içinde şu satıra yapıştır:
       gaMeasurementId: "G-XXXXXXXXXX"   ->  kendi kodunla değiştir
