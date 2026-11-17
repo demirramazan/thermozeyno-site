@@ -28,7 +28,7 @@ window.THERMOMIX_CONFIG = {
          installmentBase = vade farksız taksite giren tutar (TM7 fiyatı). */
       installments: 9,
       installmentBase: "89.990,00 TL",
-      image: "img/kampanya-kasim.jpg",
+      image: "img/tm7-detail.png",
       includes: [
         "Thermomix® TM7 — vade farksız 9 taksitle 89.990₺ (9.998,89₺/ay)",
         "Thermomix® Karıştırma Kabı — kupon koduyla 6.000₺ (liste: 15.990₺ · 9.990₺ tasarruf)",
@@ -100,14 +100,38 @@ window.THERMOMIX_CONFIG = {
 
   /* ---- AÇILIŞ KAMPANYA POPUP'I ---- */
   campaignPopup: {
-    enabled: false,
-    once: true,
-    emoji: "🍂",
-    title: "İçinizi Isıtan Fırsat! Kasım Kampanyası",
-    cta: "9 Taksit & Karıştırma Kabı Fırsatını Gör →",
+    enabled: true,
+    once: true,              // aynı oturumda bir kez gösterilir
+    delayMs: 1200,
+    eyebrow: "Kasım kampanyası · 1–30 Kasım",
+    title: "TM7 alana Karıştırma Kabı 6.000 ₺",
+    text: "Bir Thermomix danışmanının tanıtımına katılıp Kasım içinde TM7 satın alanlara özel.",
+    image: "img/tm7-detail.png",
+    imageAlt: "Thermomix TM7 mutfak masasında, ekranda Cookidoo tarifleri",
+    points: [
+      { icon: "card", title: "Vade farksız 9 taksit", text: "Aylık 9.998,89 ₺ · toplam 89.990 ₺" },
+      { icon: "bowl", title: "Karıştırma Kabı 6.000 ₺", text: "15.990 ₺ yerine, kupon koduyla" },
+      { icon: "book", title: "3 ay Cookidoo® ücretsiz", text: "100.000'den fazla tarif" }
+    ],
+    cta: "Kampanyayı incele",
     target: "#kampanya",
-    intervalMs: 6000
+    waText: "Kupon kodunu iste",
+    waMessage: "Merhaba Zeynep Hanım, Kasım kampanyasındaki Karıştırma Kabı kuponu hakkında bilgi almak istiyorum."
   },
+
+  /* ---- THERMOMIX TANITIM EVLERİ ----
+     Kaynak: https://thermomix.vorwerk.com.tr/pages/vorwerk-stores */
+  showrooms: [
+    { city: "İstanbul", name: "Bahçeşehir Tanıtım Evi", address: "Bahçeşehir 1. Kısım Mah. Vali Recep Yazıcıoğlu Cad. Vaditepe Göl Evleri A1 Apt. No:50 İç Kapı No:204, Başakşehir / İstanbul" },
+    { city: "İstanbul", name: "Levent Tanıtım Evi", address: "Levent, Çamlık Caddesi No:19, 34440 Beşiktaş / İstanbul" },
+    { city: "İstanbul", name: "Suadiye Tanıtım Evi", address: "Suadiye Mah. Turşucudere Sok. No:14A, Kadıköy / İstanbul" },
+    { city: "Ankara", name: "Ankara Tanıtım Evi", address: "Gaziosmanpaşa Mah. Filistin Cad. Beyaz Zambaklar Sok. Nimet Bey Apt. No:7 Daire:11, Çankaya / Ankara" },
+    { city: "İzmir", name: "İzmir Tanıtım Evi", address: "Ali Çetinkaya Bulvarı, Ülman Apt. No:27 Kat:3 D:6, Alsancak, Konak / İzmir" },
+    { city: "Antalya", name: "Antalya Tanıtım Evi", address: "Arapsuyu Mah. 663 Sok. Mim-A Apt. No:8 D:2, Konyaaltı / Antalya" },
+    { city: "Konya", name: "Konya Tanıtım Evi", address: "Aşkan Mah. Aşkan Cad. 6/B, Meram / Konya" }
+  ],
+  showroomPhone: "+90 850 255 3000",
+  showroomSourceUrl: "https://thermomix.vorwerk.com.tr/pages/vorwerk-stores",
 
   /* ---- ÜCRETSİZ TANITIM ATÖLYELERİ (Kasım 2026) ----
      Kaynak: @thermomixtr "Kasım Ayı Thermomix® Atölyeleri" paylaşımı.

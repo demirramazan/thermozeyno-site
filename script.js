@@ -239,3 +239,109 @@
   }, { passive: true });
   onScroll();
 })();
+
+/* Tanıtım evleri + giriş kampanya penceresi */
+(function () {
+  "use strict";
+  var cfg = window.THERMOMIX_CONFIG || {};
+  var doc = document;
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function icon(name) { return '<svg class="i" aria-hidden="true"><use href="img/icons.svg#' + name + '"/></svg>'; }
+  var waNum = String(cfg.whatsappNumber || "").replace(/\D/g, "");
+  function waLink(msg) { return waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(msg || "") : "#"; }
+
+  /* ---------- Tanıtım evleri ---------- */
+  var box = doc.getElementById("showrooms");
+  var list = doc.getElementById("showroom-list");
+  if (box && list && cfg.showrooms && cfg.showrooms.length) {
+    list.innerHTML = cfg.showrooms.map(function (r) {
+      var maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Thermomix " + r.name + ", " + r.address);
+      return '<li class="showroom">' +
+        '<span class="showroom-city">' + esc(r.city) + "</span>" +
+        "<h4>" + esc(r.name) + "</h4>" +
+        "<p>" + esc(r.address) + "</p>" +
+        '<a href="' + esc(maps) + '" target="_blank" rel="noopener">' + icon("pin") + " Haritada aç</a></li>";
+    }).join("");
+    var src = box.querySelector(".js-showroom-source");
+    if (src) src.href = cfg.showroomSourceUrl || "https://thermomix.vorwerk.com.tr/pages/vorwerk-stores";
+    box.hidden = false;
+  }
+
+  /* ---------- Giriş kampanya penceresi ---------- */
+  var cp = cfg.campaignPopup;
+  if (!cp || !cp.enabled || !doc.querySelector(".hero")) return;
+  var KEY = "tm_campaign_seen";
+  try { if (cp.once && sessionStorage.getItem(KEY)) return; } catch (e) {}
+  if (cfg.campaignEndsAt && new Date(cfg.campaignEndsAt).getTime() < Date.now()) return;
+
+  var end = cfg.campaignEndsAt ? new Date(cfg.campaignEndsAt).getTime() : NaN;
+  var days = isNaN(end) ? -1 : Math.floor((end - Date.now()) / 86400000);
+  var lastFocus = null;
+
+  var modal = doc.createElement("div");
+  modal.className = "cmodal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-labelledby", "cmodal-title");
+  modal.innerHTML =
+    '<div class="cmodal-backdrop" data-close></div>' +
+    '<div class="cmodal-card">' +
+      '<button type="button" class="cmodal-close" data-close aria-label="Kapat">' + icon("close") + "</button>" +
+      '<div class="cmodal-media">' +
+        '<img src="' + esc(cp.image || "img/kampanya-kasim.jpg") + '" alt="' + esc(cp.imageAlt || "") + '" />' +
+        (days >= 0 ? '<span class="cmodal-chip">' + icon("clock") + (days > 0 ? "Son " + days + " gün" : "Son gün") + "</span>" : "") +
+      "</div>" +
+      '<div class="cmodal-body">' +
+        '<p class="eyebrow">' + esc(cp.eyebrow || "") + "</p>" +
+        '<h2 id="cmodal-title">' + esc(cp.title || "") + "</h2>" +
+        (cp.text ? '<p class="cmodal-text">' + esc(cp.text) + "</p>" : "") +
+        '<ul class="cmodal-points">' + (cp.points || []).map(function (p) {
+          return "<li>" + icon(p.icon || "check") + "<div><strong>" + esc(p.title) + "</strong><span>" + esc(p.text || "") + "</span></div></li>";
+        }).join("") + "</ul>" +
+        '<div class="cmodal-actions">' +
+          '<a href="' + esc(cp.target || "#kampanya") + '" class="btn btn-primary btn-lg" data-go>' + esc(cp.cta || "Kampanyayı incele") + "</a>" +
+          (waNum ? '<a href="' + esc(waLink(cp.waMessage)) + '" class="btn btn-outline btn-lg" target="_blank" rel="noopener" data-close-after>' + icon("whatsapp") + " " + esc(cp.waText || "WhatsApp'tan sor") + "</a>" : "") +
+        "</div>" +
+        '<p class="cmodal-foot">Toplam 2.500 adet TM7 ile sınırlıdır. Koşullar kampanya bölümündedir.</p>' +
+      "</div>" +
+    "</div>";
+
+  function markSeen() { try { if (cp.once) sessionStorage.setItem(KEY, "1"); } catch (e) {} }
+  function close() {
+    markSeen();
+    modal.classList.remove("is-open");
+    doc.body.classList.remove("modal-open");
+    doc.removeEventListener("keydown", onKey);
+    setTimeout(function () { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 250);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function onKey(e) {
+    if (e.key === "Escape") { close(); return; }
+    if (e.key === "Tab") {
+      var f = modal.querySelectorAll("a, button");
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  modal.addEventListener("click", function (e) {
+    if (e.target.closest("[data-close]")) { close(); return; }
+    if (e.target.closest("[data-go]")) { close(); return; }
+    if (e.target.closest("[data-close-after]")) { setTimeout(close, 0); }
+  });
+
+  setTimeout(function () {
+    if (doc.body.classList.contains("nav-open")) return;
+    lastFocus = doc.activeElement;
+    doc.body.appendChild(modal);
+    doc.body.classList.add("modal-open");
+    requestAnimationFrame(function () { modal.classList.add("is-open"); });
+    doc.addEventListener("keydown", onKey);
+    var c = modal.querySelector(".cmodal-close");
+    if (c) c.focus({ preventScroll: true });
+  }, cp.delayMs || 1200);
+})();
