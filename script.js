@@ -271,77 +271,150 @@
     box.hidden = false;
   }
 
-  /* ---------- Giriş kampanya penceresi ---------- */
+  /* ---------- Giriş kampanya bildirimi (geçişli slaytlar) ---------- */
   var cp = cfg.campaignPopup;
-  if (!cp || !cp.enabled || !doc.querySelector(".hero")) return;
+  var slides = cp && cp.slides ? cp.slides : [];
+  if (!cp || !cp.enabled || !slides.length || !doc.querySelector(".hero")) return;
   var KEY = "tm_campaign_seen";
   try { if (cp.once && sessionStorage.getItem(KEY)) return; } catch (e) {}
   if (cfg.campaignEndsAt && new Date(cfg.campaignEndsAt).getTime() < Date.now()) return;
 
-  var end = cfg.campaignEndsAt ? new Date(cfg.campaignEndsAt).getTime() : NaN;
-  var days = isNaN(end) ? -1 : Math.floor((end - Date.now()) / 86400000);
-  var lastFocus = null;
+  var INTERVAL = cp.intervalMs || 5000;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var idx = 0, timer = null, lastFocus = null;
 
-  var modal = doc.createElement("div");
-  modal.className = "cmodal";
-  modal.setAttribute("role", "dialog");
-  modal.setAttribute("aria-modal", "true");
-  modal.setAttribute("aria-labelledby", "cmodal-title");
-  modal.innerHTML =
-    '<div class="cmodal-backdrop" data-close></div>' +
-    '<div class="cmodal-card">' +
-      '<button type="button" class="cmodal-close" data-close aria-label="Kapat">' + icon("close") + "</button>" +
-      '<div class="cmodal-media">' +
-        '<img src="' + esc(cp.image || "img/kampanya-kasim.jpg") + '" alt="' + esc(cp.imageAlt || "") + '" />' +
-        (days >= 0 ? '<span class="cmodal-chip">' + icon("clock") + (days > 0 ? "Son " + days + " gün" : "Son gün") + "</span>" : "") +
+  var pop = doc.createElement("div");
+  pop.className = "npop";
+  pop.setAttribute("role", "dialog");
+  pop.setAttribute("aria-modal", "true");
+  pop.setAttribute("aria-label", "Kampanyalar");
+  pop.innerHTML =
+    '<div class="npop-backdrop" data-close></div>' +
+    '<div class="npop-card">' +
+      '<button type="button" class="npop-close" data-close aria-label="Kapat">' + icon("close") + "</button>" +
+      '<div class="npop-track">' +
+        slides.map(function (s, i) {
+          return '<a class="npop-slide' + (i === 0 ? " is-active" : "") + (s.fit === "contain" ? " is-contain" : "") + '" href="' + esc(s.link || "#kampanya") + '" data-go' +
+            (i === 0 ? "" : ' tabindex="-1" aria-hidden="true"') + ">" +
+            '<img src="' + esc(s.image) + '" alt="' + esc(s.alt || s.title || "") + '"' + (i === 0 ? "" : ' loading="lazy"') + " />" +
+            '<span class="npop-cap">' +
+              (s.tag ? '<span class="npop-tag">' + esc(s.tag) + "</span>" : "") +
+              "<strong>" + esc(s.title || "") + "</strong>" +
+              (s.text ? "<span>" + esc(s.text) + "</span>" : "") +
+              '<span class="npop-more">İncele ' + icon("arrow-right") + "</span>" +
+            "</span></a>";
+        }).join("") +
       "</div>" +
-      '<div class="cmodal-body">' +
-        '<p class="eyebrow">' + esc(cp.eyebrow || "") + "</p>" +
-        '<h2 id="cmodal-title">' + esc(cp.title || "") + "</h2>" +
-        (cp.text ? '<p class="cmodal-text">' + esc(cp.text) + "</p>" : "") +
-        '<ul class="cmodal-points">' + (cp.points || []).map(function (p) {
-          return "<li>" + icon(p.icon || "check") + "<div><strong>" + esc(p.title) + "</strong><span>" + esc(p.text || "") + "</span></div></li>";
-        }).join("") + "</ul>" +
-        '<div class="cmodal-actions">' +
-          '<a href="' + esc(cp.target || "#kampanya") + '" class="btn btn-primary btn-lg" data-go>' + esc(cp.cta || "Kampanyayı incele") + "</a>" +
-          (waNum ? '<a href="' + esc(waLink(cp.waMessage)) + '" class="btn btn-outline btn-lg" target="_blank" rel="noopener" data-close-after>' + icon("whatsapp") + " " + esc(cp.waText || "WhatsApp'tan sor") + "</a>" : "") +
-        "</div>" +
-        '<p class="cmodal-foot">Toplam 2.500 adet TM7 ile sınırlıdır. Koşullar kampanya bölümündedir.</p>' +
-      "</div>" +
+      (slides.length > 1
+        ? '<button type="button" class="npop-nav npop-prev" data-prev aria-label="Önceki">' + icon("arrow-right") + "</button>" +
+          '<button type="button" class="npop-nav npop-next" data-next aria-label="Sonraki">' + icon("arrow-right") + "</button>" +
+          '<div class="npop-dots" role="tablist" aria-label="Slaytlar">' +
+            slides.map(function (_, i) {
+              return '<button type="button" class="npop-dot' + (i === 0 ? " is-active" : "") + '" data-dot="' + i + '" aria-label="' + (i + 1) + '. slayt"><i></i></button>';
+            }).join("") +
+          "</div>"
+        : "") +
     "</div>";
 
+  var items = pop.querySelectorAll(".npop-slide");
+  var dots = pop.querySelectorAll(".npop-dot");
+
+  function show(i) {
+    idx = (i + items.length) % items.length;
+    Array.prototype.forEach.call(items, function (el, k) {
+      var on = k === idx;
+      el.classList.toggle("is-active", on);
+      if (on) { el.removeAttribute("tabindex"); el.removeAttribute("aria-hidden"); }
+      else { el.setAttribute("tabindex", "-1"); el.setAttribute("aria-hidden", "true"); }
+    });
+    Array.prototype.forEach.call(dots, function (d, k) {
+      d.classList.toggle("is-active", k === idx);
+      d.setAttribute("aria-selected", k === idx ? "true" : "false");
+    });
+    restart();
+  }
+  function stop() { if (timer) { clearTimeout(timer); timer = null; } pop.classList.remove("is-playing"); }
+  function restart() {
+    stop();
+    if (reduce || items.length < 2) return;
+    void pop.offsetWidth;            // ilerleme çubuğu animasyonunu baştan başlat
+    pop.classList.add("is-playing");
+    pop.style.setProperty("--npop-interval", INTERVAL + "ms");
+    timer = setTimeout(function () { show(idx + 1); }, INTERVAL);
+  }
   function markSeen() { try { if (cp.once) sessionStorage.setItem(KEY, "1"); } catch (e) {} }
   function close() {
-    markSeen();
-    modal.classList.remove("is-open");
+    stop(); markSeen();
+    pop.classList.remove("is-open");
     doc.body.classList.remove("modal-open");
     doc.removeEventListener("keydown", onKey);
-    setTimeout(function () { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 250);
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    setTimeout(function () { if (pop.parentNode) pop.parentNode.removeChild(pop); }, 250);
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
   }
   function onKey(e) {
-    if (e.key === "Escape") { close(); return; }
-    if (e.key === "Tab") {
-      var f = modal.querySelectorAll("a, button");
-      var first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowRight") show(idx + 1);
+    else if (e.key === "ArrowLeft") show(idx - 1);
   }
-  modal.addEventListener("click", function (e) {
-    if (e.target.closest("[data-close]")) { close(); return; }
-    if (e.target.closest("[data-go]")) { close(); return; }
-    if (e.target.closest("[data-close-after]")) { setTimeout(close, 0); }
+
+  pop.addEventListener("click", function (e) {
+    var t = e.target;
+    if (t.closest("[data-close]")) { close(); return; }
+    if (t.closest("[data-next]")) { show(idx + 1); return; }
+    if (t.closest("[data-prev]")) { show(idx - 1); return; }
+    var dot = t.closest("[data-dot]");
+    if (dot) { show(parseInt(dot.getAttribute("data-dot"), 10)); return; }
+    var go = t.closest("[data-go]");
+    if (go) {
+      var href = go.getAttribute("href") || "";
+      if (href.charAt(0) === "#") {
+        /* Sayfa içi bağlantı: pencereyi kapat, kilit kalkınca bölüme kaydır */
+        e.preventDefault();
+        close();
+        var target = doc.querySelector(href);
+        setTimeout(function () {
+          if (target) {
+            target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+            /* Yedek: yumuşak kaydırma çalışmadıysa doğrudan git */
+            setTimeout(function () {
+              if (Math.abs(target.getBoundingClientRect().top) > 200 && window.scrollY < 10) {
+                var root = doc.documentElement, prev = root.style.scrollBehavior;
+                root.style.scrollBehavior = "auto";
+                target.scrollIntoView({ block: "start" });
+                root.style.scrollBehavior = prev;
+              }
+            }, 900);
+          }
+          if (history.replaceState) history.replaceState(null, "", href);
+        }, 30);
+      } else {
+        close();                                   // başka sayfaya normal şekilde gider
+      }
+    }
   });
+  var card = pop.querySelector(".npop-card");
+  card.addEventListener("mouseenter", stop);
+  card.addEventListener("mouseleave", restart);
+
+  /* Dokunmatik: sağa/sola kaydırma */
+  var sx = null, moved = false;
+  card.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; moved = false; stop(); }, { passive: true });
+  card.addEventListener("touchmove", function (e) { if (sx !== null && Math.abs(e.touches[0].clientX - sx) > 10) moved = true; }, { passive: true });
+  card.addEventListener("touchend", function (e) {
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx; sx = null;
+    if (dx < -40) show(idx + 1); else if (dx > 40) show(idx - 1); else restart();
+  }, { passive: true });
+  card.addEventListener("click", function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
 
   setTimeout(function () {
     if (doc.body.classList.contains("nav-open")) return;
     lastFocus = doc.activeElement;
-    doc.body.appendChild(modal);
+    doc.body.appendChild(pop);
     doc.body.classList.add("modal-open");
-    requestAnimationFrame(function () { modal.classList.add("is-open"); });
+    requestAnimationFrame(function () { pop.classList.add("is-open"); restart(); });
     doc.addEventListener("keydown", onKey);
-    var c = modal.querySelector(".cmodal-close");
+    var c = pop.querySelector(".npop-close");
     if (c) c.focus({ preventScroll: true });
-  }, cp.delayMs || 1200);
+  }, cp.delayMs || 1500);
 })();

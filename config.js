@@ -102,21 +102,19 @@ window.THERMOMIX_CONFIG = {
   campaignPopup: {
     enabled: true,
     once: true,              // aynı oturumda bir kez gösterilir
-    delayMs: 1200,
-    eyebrow: "Kasım kampanyası · 1–30 Kasım",
-    title: "TM7 alana Karıştırma Kabı 6.000 ₺",
-    text: "Bir Thermomix danışmanının tanıtımına katılıp Kasım içinde TM7 satın alanlara özel.",
-    image: "img/tm7-detail.png",
-    imageAlt: "Thermomix TM7 mutfak masasında, ekranda Cookidoo tarifleri",
-    points: [
-      { icon: "card", title: "Vade farksız 9 taksit", text: "Aylık 9.998,89 ₺ · toplam 89.990 ₺" },
-      { icon: "bowl", title: "Karıştırma Kabı 6.000 ₺", text: "15.990 ₺ yerine, kupon koduyla" },
-      { icon: "book", title: "3 ay Cookidoo® ücretsiz", text: "100.000'den fazla tarif" }
-    ],
-    cta: "Kampanyayı incele",
-    target: "#kampanya",
-    waText: "Kupon kodunu iste",
-    waMessage: "Merhaba Zeynep Hanım, Kasım kampanyasındaki Karıştırma Kabı kuponu hakkında bilgi almak istiyorum."
+    delayMs: 1500,           // sayfa açıldıktan kaç ms sonra çıksın
+    intervalMs: 5000,        // slaytlar arası süre
+    /* Her slayt: görsel + kısa metin. Görsele tıklayınca "link" adresine gider. */
+    slides: [
+      { image: "img/kampanya-kasim.jpg", alt: "Kasım kampanyası afişi: TM7 vade farksız 9 taksit, Karıştırma Kabı 6.000 TL",
+        tag: "Kasım kampanyası", title: "Karıştırma Kabı 6.000 ₺", text: "15.990 ₺ yerine, TM7 alanlara kuponla", link: "#kampanya" },
+      { image: "img/tm7-detail.png", alt: "Thermomix TM7 mutfak masasında",
+        tag: "Vade farksız", title: "9 taksitle ayda 9.999 ₺", text: "Toplam 89.990 ₺ · KDV dahil, ücretsiz kargo", link: "#satin-al" },
+      { image: "img/tm7-kitchen.jpg", alt: "Thermomix TM7 akşam ışığında mutfakta",
+        tag: "Ücretsiz", title: "Kasım tadım ve tanıtım atölyeleri", text: "16 bölgede tarihler ve tanıtım evleri", link: "#atolyeler" },
+      { image: "img/tm7-side.png", alt: "Thermomix TM7 ürün fotoğrafı", fit: "contain",
+        tag: "4U Kazanç Programı", title: "4 satışta TM7'niz ücretsiz", text: "31 Aralık'a kadar uzatıldı", link: "danisman-ol.html" }
+    ]
   },
 
   /* ---- THERMOMIX TANITIM EVLERİ ----
