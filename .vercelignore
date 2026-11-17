@@ -3,3 +3,6 @@ siteyi-baslat.bat
 GOOGLE-SEO-REHBERI.txt
 .claude
 site
+.env*
+.vercel
+.git
