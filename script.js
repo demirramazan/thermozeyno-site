@@ -142,6 +142,37 @@
     var isToday = function (s) { return s.d && w.year && w.month && new Date(w.year, w.month - 1, s.d).getTime() === today.getTime(); };
     var SHOW = 6;
     var monthShort = (w.monthLabel || "").slice(0, 3);
+    var lower = function (t) { return String(t || "").toLocaleLowerCase("tr-TR"); };
+    var showroomFor = function (place) {
+      var p = lower(place);
+      return (cfg.showrooms || []).filter(function (r) {
+        return (r.match || [r.name]).some(function (m) { return p.indexOf(lower(m)) > -1; });
+      })[0] || null;
+    };
+    var isOnline = function (place) { return /online|zoom/i.test(place || ""); };
+    var mapsUrl = function (q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q); };
+    var searchCity = function (loc) {
+      var c = String(loc.city || "").replace(/\s+(Anadolu|Avrupa)\b.*$/i, "");
+      return /diğer|online/i.test(c) ? "" : c;
+    };
+    var detailHtml = function (loc, s) {
+      var when = s.date + " · " + s.time;
+      var msg = "Merhaba Zeynep Hanım, " + when + " tarihli " + s.place + (s.topic ? " (" + s.topic + ")" : "") + " atölyesine kayıt olmak istiyorum.";
+      var reg = '<a class="btn btn-primary btn-sm" href="' + esc(waLink(msg)) + '"' + (waNum ? ' target="_blank" rel="noopener"' : "") + ">" + icon("whatsapp") + " Bu tarihe kayıt ol</a>";
+      var room = showroomFor(s.place);
+      var info, map = "";
+      if (room) {
+        info = icon("pin") + "<div><strong>Thermomix " + esc(room.name) + "</strong><span>" + esc(room.address) + "</span></div>";
+        map = '<a class="btn btn-outline btn-sm" href="' + esc(mapsUrl("Thermomix " + room.name + ", " + room.address)) + '" target="_blank" rel="noopener">' + icon("pin") + " Haritada aç</a>";
+      } else if (isOnline(s.place)) {
+        info = icon("screen") + "<div><strong>Online katılım</strong><span>Zoom bağlantısı kayıttan sonra size iletilir.</span></div>";
+      } else {
+        var city = searchCity(loc);
+        info = icon("pin") + "<div><strong>" + esc(s.place) + "</strong><span>Açık adres kayıttan sonra iletilir; yaklaşık konumu haritada görebilirsiniz.</span></div>";
+        map = '<a class="btn btn-outline btn-sm" href="' + esc(mapsUrl(s.place + (city ? ", " + city : ""))) + '" target="_blank" rel="noopener">' + icon("pin") + " Haritada ara</a>";
+      }
+      return '<div class="ws-detail-info">' + info + '</div><div class="ws-detail-actions">' + reg + map + "</div>";
+    };
 
     ws.innerHTML =
       '<div class="ws-picker">' +
@@ -167,11 +198,17 @@
       var rows = sessions.map(function (s, k) {
         var parts = String(s.date || "").split(" ");
         var dayName = parts.slice(2).join(" ");
+        var did = "ws-d-" + i + "-" + k;
+        var room = showroomFor(s.place);
         return '<li class="ws-item' + (k >= SHOW ? " is-extra" : "") + (isToday(s) ? " is-today" : "") + '">' +
-          '<div class="ws-date"><strong>' + esc(parts[0]) + "</strong><span>" + esc(monthShort || parts[1] || "") + "</span></div>" +
-          '<div class="ws-info"><p class="ws-when">' + esc(dayName) + " · " + esc(s.time) + (isToday(s) ? ' <em class="ws-badge">Bugün</em>' : "") + "</p>" +
-          '<p class="ws-place">' + esc(s.place) + "</p>" +
-          (s.topic ? '<p class="ws-topic">' + esc(s.topic) + "</p>" : "") + "</div></li>";
+          '<button type="button" class="ws-row" aria-expanded="false" aria-controls="' + did + '">' +
+            '<span class="ws-date"><strong>' + esc(parts[0]) + "</strong><span>" + esc(monthShort || parts[1] || "") + "</span></span>" +
+            '<span class="ws-info"><span class="ws-when">' + esc(dayName) + " · " + esc(s.time) + (isToday(s) ? ' <em class="ws-badge">Bugün</em>' : "") + "</span>" +
+            '<span class="ws-place">' + esc(s.place) + (room ? ' <em class="ws-house">Tanıtım evi</em>' : "") + "</span>" +
+            (s.topic ? '<span class="ws-topic">' + esc(s.topic) + "</span>" : "") + "</span>" +
+            '<span class="ws-chevron">' + icon("chevron-down") + "</span>" +
+          "</button>" +
+          '<div class="ws-detail" id="' + did + '" hidden>' + detailHtml(loc, s) + "</div></li>";
       }).join("");
       var body;
       if (sessions.length) {
@@ -183,6 +220,7 @@
       panel.innerHTML =
         '<div class="ws-panel-head"><div><h3>' + esc(loc.city) + "</h3>" + (loc.region ? "<p>" + esc(loc.region) + "</p>" : "") + "</div>" +
           (sessions.length ? '<span class="ws-count">' + sessions.length + " atölye · ücretsiz</span>" : "") + "</div>" +
+        (sessions.length ? '<p class="ws-hint">' + icon("pin") + " Adres ve kayıt için bir tarihe dokunun.</p>" : "") +
         body +
         '<div class="ws-actions">' +
           '<a class="btn btn-primary" href="' + esc(loc.formUrl || w.directoryUrl || "#") + '" target="_blank" rel="noopener">' + esc(loc.ctaLabel || "Kayıt formunu aç") + " " + icon("external") + "</a>" +
@@ -190,6 +228,24 @@
         "</div>";
       var more = $(".ws-more", panel);
       if (more) more.addEventListener("click", function () { panel.classList.add("show-all"); more.remove(); });
+      /* Açılır satırlar: aynı anda tek satır açık */
+      $$(".ws-row", panel).forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("aria-expanded") === "true";
+          $$(".ws-row", panel).forEach(function (b) {
+            b.setAttribute("aria-expanded", "false");
+            b.parentNode.classList.remove("is-open");
+            var d = doc.getElementById(b.getAttribute("aria-controls"));
+            if (d) d.hidden = true;
+          });
+          if (!open) {
+            btn.setAttribute("aria-expanded", "true");
+            btn.parentNode.classList.add("is-open");
+            var det = doc.getElementById(btn.getAttribute("aria-controls"));
+            if (det) det.hidden = false;
+          }
+        });
+      });
       tabs.forEach(function (t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); });
       select.value = String(i);
     };
@@ -266,6 +322,15 @@
         "<p>" + esc(r.address) + "</p>" +
         '<a href="' + esc(maps) + '" target="_blank" rel="noopener">' + icon("pin") + " Haritada aç</a></li>";
     }).join("");
+    var cnt = box.querySelector(".js-showroom-count");
+    if (cnt) cnt.textContent = cfg.showrooms.length;
+    var det = doc.getElementById("showroom-details");
+    var openRooms = function () { if (det) det.open = true; };
+    if (location.hash === "#tanitim-evleri") openRooms();
+    doc.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href$="#tanitim-evleri"]');
+      if (a) openRooms();
+    });
     var src = box.querySelector(".js-showroom-source");
     if (src) src.href = cfg.showroomSourceUrl || "https://thermomix.vorwerk.com.tr/pages/vorwerk-stores";
     box.hidden = false;

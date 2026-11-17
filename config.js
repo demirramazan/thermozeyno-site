@@ -118,15 +118,17 @@ window.THERMOMIX_CONFIG = {
   },
 
   /* ---- THERMOMIX TANITIM EVLERİ ----
-     Kaynak: https://thermomix.vorwerk.com.tr/pages/vorwerk-stores */
+     Kaynak: https://thermomix.vorwerk.com.tr/pages/vorwerk-stores
+     match: atölye takvimindeki "yer" bu ifadelerden birini içeriyorsa
+     o satırda bu adres gösterilir. */
   showrooms: [
-    { city: "İstanbul", name: "Bahçeşehir Tanıtım Evi", address: "Bahçeşehir 1. Kısım Mah. Vali Recep Yazıcıoğlu Cad. Vaditepe Göl Evleri A1 Apt. No:50 İç Kapı No:204, Başakşehir / İstanbul" },
-    { city: "İstanbul", name: "Levent Tanıtım Evi", address: "Levent, Çamlık Caddesi No:19, 34440 Beşiktaş / İstanbul" },
-    { city: "İstanbul", name: "Suadiye Tanıtım Evi", address: "Suadiye Mah. Turşucudere Sok. No:14A, Kadıköy / İstanbul" },
-    { city: "Ankara", name: "Ankara Tanıtım Evi", address: "Gaziosmanpaşa Mah. Filistin Cad. Beyaz Zambaklar Sok. Nimet Bey Apt. No:7 Daire:11, Çankaya / Ankara" },
-    { city: "İzmir", name: "İzmir Tanıtım Evi", address: "Ali Çetinkaya Bulvarı, Ülman Apt. No:27 Kat:3 D:6, Alsancak, Konak / İzmir" },
-    { city: "Antalya", name: "Antalya Tanıtım Evi", address: "Arapsuyu Mah. 663 Sok. Mim-A Apt. No:8 D:2, Konyaaltı / Antalya" },
-    { city: "Konya", name: "Konya Tanıtım Evi", address: "Aşkan Mah. Aşkan Cad. 6/B, Meram / Konya" }
+    { city: "İstanbul", name: "Bahçeşehir Tanıtım Evi", match: ["Bahçeşehir Tanıtım"], address: "Bahçeşehir 1. Kısım Mah. Vali Recep Yazıcıoğlu Cad. Vaditepe Göl Evleri A1 Apt. No:50 İç Kapı No:204, Başakşehir / İstanbul" },
+    { city: "İstanbul", name: "Levent Tanıtım Evi", match: ["Levent Tanıtım"], address: "Levent, Çamlık Caddesi No:19, 34440 Beşiktaş / İstanbul" },
+    { city: "İstanbul", name: "Suadiye Tanıtım Evi", match: ["Suadiye Tanıtım"], address: "Suadiye Mah. Turşucudere Sok. No:14A, Kadıköy / İstanbul" },
+    { city: "Ankara", name: "Ankara Tanıtım Evi", match: ["Ankara Tanıtım"], address: "Gaziosmanpaşa Mah. Filistin Cad. Beyaz Zambaklar Sok. Nimet Bey Apt. No:7 Daire:11, Çankaya / Ankara" },
+    { city: "İzmir", name: "İzmir Tanıtım Evi", match: ["Alsancak"], address: "Ali Çetinkaya Bulvarı, Ülman Apt. No:27 Kat:3 D:6, Alsancak, Konak / İzmir" },
+    { city: "Antalya", name: "Antalya Tanıtım Evi", match: ["Antalya Tanıtım"], address: "Arapsuyu Mah. 663 Sok. Mim-A Apt. No:8 D:2, Konyaaltı / Antalya" },
+    { city: "Konya", name: "Konya Tanıtım Evi", match: ["Konya Tanıtım"], address: "Aşkan Mah. Aşkan Cad. 6/B, Meram / Konya" }
   ],
   showroomPhone: "+90 850 255 3000",
   showroomSourceUrl: "https://thermomix.vorwerk.com.tr/pages/vorwerk-stores",
