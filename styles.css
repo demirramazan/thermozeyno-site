@@ -698,3 +698,8 @@ img { -webkit-user-drag: none; -webkit-touch-callout: none; }
   .ws-detail-actions .btn { flex: 1 1 auto; }
   .showroom-details > .showroom-list { border-top: 0; }
 }
+
+/* Sipariş kartında bağlantılar alt alta */
+.order-card .link-arrow { display: flex; width: fit-content; }
+.order-card .link-arrow + .link-arrow { margin-top: 10px; }
+.key-box a { color: var(--brand-600); font-weight: 600; font-size: .9rem; text-decoration: underline; text-underline-offset: 2px; }

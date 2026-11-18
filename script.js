@@ -31,6 +31,14 @@
   $$(".js-ig").forEach(function (a) { external(a, cfg.instagramUrl); });
   $$(".js-yt").forEach(function (a) { external(a, cfg.youtubeUrl); });
 
+  /* Vorwerk bağlantılarına danışman bilgisini ekler: {REF} → TM048014@ZEYNEP_DEMİR (adres için kodlanmış) */
+  function advisorUrl(url) {
+    return String(url || "")
+      .replace("{REF}", encodeURIComponent(cfg.advisorRef || "").replace(/%40/g, "@"))
+      .replace("{ID}", encodeURIComponent(cfg.advisorId || ""));
+  }
+  $$(".js-store").forEach(function (a) { if (cfg.advisorStoreUrl) external(a, advisorUrl(cfg.advisorStoreUrl)); });
+
   /* ---------- Danışman bilgisi, yıl ---------- */
   $$(".js-advisor-id").forEach(function (el) { if (cfg.advisorId) el.textContent = cfg.advisorId; });
   $$(".js-advisor-name").forEach(function (el) { if (cfg.advisorName) el.textContent = cfg.advisorName; });
@@ -44,7 +52,7 @@
     $$(".js-installments").forEach(function (el) { el.textContent = n; });
     $$(".js-monthly").forEach(function (el) { el.textContent = tl(base / n); });
     $$(".js-total").forEach(function (el) { el.textContent = tl(base); });
-    $$(".js-buy").forEach(function (a) { external(a, String(model.url || "").replace("{ID}", encodeURIComponent(cfg.advisorId || ""))); });
+    $$(".js-buy").forEach(function (a) { external(a, advisorUrl(model.url)); });
     $$(".js-includes").forEach(function (ul) {
       ul.innerHTML = (model.includes || []).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
     });

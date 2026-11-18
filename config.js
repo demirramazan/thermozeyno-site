@@ -14,9 +14,14 @@ window.THERMOMIX_CONFIG = {
   advisorTitle: "Bağımsız Thermomix® Danışmanı",
   advisorId: "TM048014",
 
+  /* Danışman bağlantısı: Vorwerk sitesine bu "ref" ile gelen müşteride
+     danışman otomatik seçili olur (QR kodu ve danışman linkiyle aynı yöntem). */
+  advisorRef: "TM048014@ZEYNEP_DEMİR",
+  advisorStoreUrl: "https://thermomix.vorwerk.com.tr/pages/storepoint-turkiye/id_TM048014?ref={REF}",
+
   /* ---- KAMPANYALI MODELLER (satın alma) ----
      Satın almak için bu resmi kampanya sayfalarına gidilir.
-     {ID} yerine yukarıdaki advisorId otomatik konur. */
+     {REF} yerine advisorRef, {ID} yerine advisorId otomatik konur. */
   models: [
     {
       sku: "TM7 + Karıştırma Kabı",
@@ -36,7 +41,7 @@ window.THERMOMIX_CONFIG = {
         "KDV dahil · ücretsiz kargo"
       ],
       details: "Kampanya 1 – 30 Kasım 2026 tarihleri arasında geçerlidir. Bağımsız Thermomix® danışmanlarının tanıtımlarından en az birine katılıp aynı tarihlerde Thermomix® TM7 satın alanlara, 15.990₺ değerindeki Thermomix® Karıştırma Kabı size özel kupon koduyla 6.000₺! TM7 vade farksız 9 taksitle 89.990₺'dir (9.998,89₺/ay). Daha önce yıllık Cookidoo® aboneliği satın almamış hesaplara 3 aylık Cookidoo® üyeliği ücretsiz; süre, üyeliğin cihazdan aktive edildiği tarihte başlar. Satın alma sırasında danışmanınızı belirtmeniz zorunludur. Kampanya toplam 2.500 adet TM7 ile sınırlıdır, başka kampanyalarla birleştirilemez; kupon yalnızca Karıştırma Kabı alımında kullanılır, nakde çevrilemez.",
-      url: "https://thermomix.vorwerk.com.tr/products/thermomix-tm7"
+      url: "https://thermomix.vorwerk.com.tr/products/thermomix-tm7?ref={REF}"
     }
   ],
 
